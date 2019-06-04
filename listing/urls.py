@@ -19,7 +19,10 @@ Including another URLconf
     
 from django.urls import path, include
 from listing import views
+from .views import all_listings, create_listing
 
 urlpatterns = [
-    path('create/', views.create_listing, name='create'),
+    path('', all_listings, name='listings'),
+    path('', create_listing, name='create_listing'),
     ]
+    

@@ -25,6 +25,7 @@ from account import urls as urls_account
 from listing import urls as urls_listing
 from django.views.static import serve
 from django.conf import settings
+from .settings import MEDIA_ROOT
 
 
 urlpatterns = [
