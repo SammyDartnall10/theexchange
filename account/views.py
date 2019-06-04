@@ -33,7 +33,7 @@ def login(request):
 
             if user:
                 auth.login(user=user, request=request)
-                return redirect(reverse('index'))
+                return redirect(reverse('profile'))
             else:
                 login_form.add_error(None, "Your username or password is incorrect")
     else:
@@ -44,7 +44,7 @@ def login(request):
 def register(request):
     """Render the registration page"""
     if request.user.is_authenticated:
-        return redirect(reverse('index'))
+        return redirect(reverse('profile'))
 
     if request.method == "POST":
         registration_form = UserRegistrationForm(request.POST)

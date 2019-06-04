@@ -20,14 +20,21 @@ from django.contrib import admin
 from django.urls import path, include
 from landing import urls as urls_landing
 from about import urls as urls_about
+from exchange import urls as urls_exchange
 from account import urls as urls_account
+from listing import urls as urls_listing
+from django.views.static import serve
+from django.conf import settings
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing.urls')),
     path('about/', include('about.urls')),
-    path('account/', include('account.urls'))
+    path('exchange', include('exchange.urls')),
+    path('account/', include('account.urls')),
+    path('listing/', include('listing.urls')),
+    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT }),
 ]
 
 #then pull through the views and use the urls to call the functions - that then renders the template
