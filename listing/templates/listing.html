@@ -19,11 +19,7 @@
     {% endfor %}
 </div>
 
-<form method="POST">
-        {% csrf_token %}
-        {{ new_listing.as_p }}
-    <button type = "submit"> Upload </button>
-</form>
+
 
 {% endblock %}
 

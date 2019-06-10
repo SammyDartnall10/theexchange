@@ -20,4 +20,4 @@ def create_listing(request, pk=None):
             return redirect(listing, listing.pk)
     else:
         form= NewListing(instance=listing)
-    return render(request, 'listing.html', {'form': form})
+    return render(request, 'createnew.html', {'form': form})
