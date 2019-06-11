@@ -19,7 +19,7 @@ Including another URLconf
     
 from django.urls import path, include
 from account import views, urls_reset
-from listing import views as listing_views
+from listing import urls as urls_listing
 
 
 urlpatterns = [
@@ -28,6 +28,6 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('login/', views.login, name='login'),
     path('password-reset/', include(urls_reset)),
-    path('create_listing/', listing_views.create_listing, name='create_listing'),
+    path('listing/', include(urls_listing)),
 ]
 

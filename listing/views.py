@@ -5,13 +5,10 @@ from .models import Listing
 # Create your views here.
     
 
-def all_listings(request):
-    "Get all instances of listings"
-    listings = Listing.objects.all()
-    return render(request, "listing.html", {"listings": listings})
+
     
 def create_listing(request, pk=None):
-    """Create a post """
+    """Create a post - looks to see if theres an existing post"""
     listing = get_object_or_404(Listing, pk= pk) if pk else None
     if request.method == "POST":
         form = NewListing(request.POST, request.FILES, instance=listing)
@@ -21,3 +18,4 @@ def create_listing(request, pk=None):
     else:
         form= NewListing(instance=listing)
     return render(request, 'createnew.html', {'form': form})
+    
