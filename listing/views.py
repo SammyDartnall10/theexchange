@@ -7,26 +7,31 @@ from .models import Listing
 # Create your views here.
 
 def create_listing(request):
+    print(request.user)
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        try:
-            if request.method == "POST":
-                form = NewListing(request.POST, request.FILES)
-                if form.is_valid():
-                    listing = form.save(commit=False)
-                    listing.owner = request.user
-                    listing.save()
-                    print("saved form")
-                    return redirect('profile')
-            else:
-                form = NewListing()
+        if request.method == "POST":
+            form = NewListing(request.POST, request.FILES)
+            if form.is_valid():
+                listing = form.save(commit=False)
+                listing.owner = request.user
+                listing.save()
+                return redirect('profile')
+        else:
+            form = NewListing()
 
-        except:
-            print("end error")
-            return HttpResponseForbidden()
 
     return render(request, 'createnew.html', {'form': form})
+    
+def get_listings(request):
+    """
+    Create a view that will return a list
+    of Posts that were published prior to 'now'
+    and render them to the 'blogposts.html' template
+    """
+    listings = Listing.objects.all()
+    return render(request, "exchange.html", {'listings': listings})
     
 """
 def create_listing(request, pk=None):

@@ -6,8 +6,8 @@ class Listing(models.Model):
     title = models.CharField(max_length=254, default="")
     content = models.TextField()
     image = models.ImageField(upload_to='images', null=False)
-    contact = models.EmailField()
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    contact = models.EmailField(default="email@email.com")
+    created_by = models.ForeignKey(User, related_name='listings', null=False, default=1, on_delete=models.SET_DEFAULT)
     tag = models.TextField()
     
     def __str__(self):
