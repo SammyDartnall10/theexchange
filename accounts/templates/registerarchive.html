@@ -1,0 +1,17 @@
+<!--original signup form-->
+{% extends 'base.html' %}
+
+{% block page_title %}Sign Up{% endblock %}
+
+{% block page_heading %}New User SignUp{% endblock %}
+
+{% block content %}
+<p> If you already have an accout you can sign in <a href="{% url 'login' %}">here</a></p>
+
+<form method="POST">
+        {% csrf_token %}
+        {{ registration_form.as_p }}
+    <button type = "submit"> Register </button>
+</form>
+
+{% endblock %}

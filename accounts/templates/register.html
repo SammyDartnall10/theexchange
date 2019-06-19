@@ -1,0 +1,32 @@
+<!--Scripts in head local only to register page - reduce overhead-->
+{% extends 'base.html' %}
+{% block head %}
+
+<script src="https://js.stripe.com/v2/" type="text/javascript"></script>
+<script type="text/javascript">
+        //<![CDATA[
+        Stripe.publishableKey = '{{ publishable }}';
+        //]]>
+</script>
+<script type="text/javascript" src="/static/js/app.js"></script>
+{% endblock %}
+
+{% block page_title %}Sign Up{% endblock %}
+
+{% block page_heading %}New User SignUp{% endblock %}
+
+{% block content %}
+<p> If you already have an accout you can sign in <a href="{% url 'login' %}">here</a></p>
+
+<form method="POST" action="{% url 'register' %}" id="payment-form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.field_errors }}
+        {{ registration_form.as_p }}
+        {{ form.stripe_id.as_hidden }}
+        
+        {% include "stripe_form.html" %}
+    <button type = "submit"> Register </button>
+</form>
+
+{% endblock %}

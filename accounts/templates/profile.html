@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ user }}'s Profile {% endblock %}
+
+{% block page_heading %}{{ user }}'s Profile {% endblock %}
+
+{% block content %}
+<p> {{ profile.email }} </p>
+<div>
+    <h1>My Listings</h1>
+    <div>
+        <p>for loop for listings here</p>
+    </div>
+</div>    
+    
+
+<p><a href="{% url 'listing' %}">New Listing</a></p>
+
+{% endblock %}
