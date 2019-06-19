@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_forms_bootstrap',
     'about',
-    'account',
+    'accounts',
     'exchange',
     'landing',
     'listing',
@@ -116,6 +117,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.CaseInsensitiveAuth'
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -161,8 +166,8 @@ AWS_S3_OBJECT_PARAMETERS = {
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #MEDIA_URL = '/media/'
 
-#STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE_KEY')
-#STRIPE_SECRET = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET_KEY')
 
 #MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
@@ -171,3 +176,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    
 MEDIA_URL = '/media/'  
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
