@@ -9,6 +9,8 @@
         //]]>
 </script>
 <script type="text/javascript" src="/static/js/app.js"></script>
+
+
 {% endblock %}
 
 {% block page_title %}Sign Up{% endblock %}
@@ -18,15 +20,26 @@
 {% block content %}
 <p> If you already have an accout you can sign in <a href="{% url 'login' %}">here</a></p>
 
-<form method="POST" action="{% url 'register' %}" id="payment-form">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        {{ form.field_errors }}
-        {{ registration_form.as_p }}
-        {{ form.stripe_id.as_hidden }}
-        
-        {% include "stripe_form.html" %}
-    <button type = "submit"> Register </button>
+
+<form role="form" method="post" id="payment-form" action="{% url 'register' %}">
+    <legend>Payment Details</legend>
+
+    <div id="credit-card-errors" style="display: none;">
+        <div id="alert-message block-message error" id="stripe-error-message"></div>
+    </div>
+
+    <div class="form-group col-md-6">
+        {{ order_form }}
+    </div>
+
+    <div class="form-group col-md-6">
+        {{ payment_form }}
+    </div>
+
+    {% csrf_token %}
+    <div class="form-group col-md-12">
+        <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
+    </div>
 </form>
 
 {% endblock %}

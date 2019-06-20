@@ -6,7 +6,7 @@ from django.template.context_processors import csrf
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from accounts.forms import UserLoginForm, UserRegistrationForm
+from accounts.forms import UserLoginForm, UserRegistrationForm, MakePaymentForm
 from django.conf import settings
 import datetime
 import stripe
@@ -55,6 +55,7 @@ def register(request):
 
     if request.method == "POST":
         registration_form = UserRegistrationForm(request.POST)
+        payment_form = MakePaymentForm(request.POST)
 
         if registration_form.is_valid():
                 try: 
@@ -62,32 +63,29 @@ def register(request):
                         amount = 499,
                         currency = "USD",
                         description = registration_form.cleaned.data['email'],
-                        card = registration_form.cleaned_data['stripe_id'], 
+                        card = payment_form.cleaned_data['stripe_id'], 
                         )
                         
                     registration_form.save()
-
+                    
                     user = auth.authenticate(username=request.POST['username'],
                                             password=request.POST['password1'])
-                except stripe.CardError:
-                    registration_form.add_error("The card has been declined")
                     
-            
-                if user:
+                    if user:
                         auth.login(user=user, request=request)
                         messages.success(request, "You have successfully registered")
-                else:
+                    else:
                         messages.error(request, "Unable to register your account at this time")
+                    
+                    #redirect('/profile')
+                    
+                except stripe.CardError:
+                    registration_form.add_error("The card has been declined")
+                
     else:
-        registration_form = UserRegistrationForm()
-    
-    args = {}
-    args.update(csrf(request))
-    args['form'] = registration_form
-    args['publishable'] = settings.STRIPE_PUBLISHABLE
-    args['months'] = range(1, 12)
-    args['years'] = range(2011, 2036)
-    args['soon'] = datetime.date.today() + datetime.timedelta(days=30)
+        registration_form = UserRegistrationForm(request.POST)
+        payment_form = MakePaymentForm(request.POST)
+
         
     return render(request, 'register.html', {'registration_form': registration_form})
 
@@ -96,3 +94,13 @@ def profile(request):
     """The user's profile page"""
     user = User.objects.get(email=request.user.email)
     return render(request, 'profile.html', {"profile": user})
+    
+#--------------------------------------------------------------------------------------------------------------------------------
+"""args = {}
+    args.update(csrf(request))
+    args['form'] = registration_form
+    args['publishable'] = settings.STRIPE_PUBLISHABLE
+    args['months'] = range(1, 12)
+    args['years'] = range(2011, 2036)
+    args['soon'] = datetime.date.today() + datetime.timedelta(days=30)
+"""
