@@ -24,6 +24,20 @@
 <form role="form" method="POST" id="payment-form" action="{% url 'register' %}">
         
     <legend>Payment Details</legend>
+    
+        {% if messages %}
+
+        <br><br><br>
+        <div class="alert alert-success">
+            <div class="messages">
+    
+                {% for message in messages %} 
+                    {{ message }} 
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endif %}
 
     <div id="credit-card-errors" style="display: none;">
         <div id="alert-message block-message error" id="stripe-error-message"></div>
