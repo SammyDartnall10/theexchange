@@ -64,18 +64,21 @@ def register(request):
                         description = "one off payment",
                         card = payment_form.cleaned_data['stripe_id'], 
                         )
-                    
-                    
+                    messages.success(request, "Payment successful")
+                    return redirect('/profile')
+
                 except stripe.error.CardError:
-                    messages.error(request, "Your card was declined!")
-                
+                    messages.error(request, "Payment failed")
+        else:
+            messages.error(request, "Form not valid")
     else:
         payment_form = MakePaymentForm(request.POST)
+        messages.error(request, "Method not POST")
 
         
     return render(request, 'register.html', {"payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
 
-
+                    
 
 def profile(request):
     """The user's profile page"""
