@@ -57,12 +57,12 @@ def register(request):
         registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
-        if registration_form.is_valid():
+        if registration_form.is_valid() and payment_form.is_valid():
                 try: 
                     customer = stripe.Charge.create(
                         amount = 499,
                         currency = "USD",
-                        description = registration_form.cleaned.data['email'],
+                        description = registration_form.cleaned_data['email'],
                         card = payment_form.cleaned_data['stripe_id'], 
                         )
                         
@@ -74,6 +74,7 @@ def register(request):
                     if user:
                         auth.login(user=user, request=request)
                         messages.success(request, "You have successfully registered")
+                        return redirect('/profile')
                     else:
                         messages.error(request, "Unable to register your account at this time")
                     

@@ -1,6 +1,7 @@
 <!--Scripts in head local only to register page - reduce overhead-->
 {% extends 'base.html' %}
-{% block head %}
+{% load static from staticfiles %}
+{% block head_js %}
 
 <script src="https://js.stripe.com/v2/" type="text/javascript"></script>
 <script type="text/javascript">
@@ -8,17 +9,16 @@
         Stripe.publishableKey = '{{ publishable }}';
         //]]>
 </script>
-<script type="text/javascript" src="/static/js/app.js"></script>
+<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
 
 {% endblock %}
-
-{% block page_title %}Sign Up{% endblock %}
 
 {% block page_heading %}New User SignUp{% endblock %}
 
 {% block content %}
 <p> If you already have an accout you can sign in <a href="{% url 'login' %}">here</a></p>
+
 
 
 <form role="form" method="post" id="payment-form" action="{% url 'register' %}">
