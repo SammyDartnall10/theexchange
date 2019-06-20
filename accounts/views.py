@@ -46,7 +46,7 @@ def login(request):
 
 
 
-stripe.api_key = settings.STRIPE_SECRET
+stripe.api_key = settings.STRIPE_PUBLISHABLE
 
 def register(request):
     """Render the registration page"""
@@ -54,41 +54,27 @@ def register(request):
         return redirect(reverse('profile'))
 
     if request.method == "POST":
-        registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
-        if registration_form.is_valid() and payment_form.is_valid():
+        if payment_form.is_valid():
                 try: 
                     customer = stripe.Charge.create(
                         amount = 499,
                         currency = "USD",
-                        description = registration_form.cleaned_data['email'],
+                        description = "one off payment",
                         card = payment_form.cleaned_data['stripe_id'], 
                         )
-                        
-                    registration_form.save()
                     
-                    user = auth.authenticate(username=request.POST['username'],
-                                            password=request.POST['password1'])
-                    
-                    if user:
-                        auth.login(user=user, request=request)
-                        messages.success(request, "You have successfully registered")
-                        return redirect('/profile')
-                    else:
-                        messages.error(request, "Unable to register your account at this time")
-                    
-                    #redirect('/profile')
                     
                 except stripe.error.CardError:
                     messages.error(request, "Your card was declined!")
                 
     else:
-        registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
         
-    return render(request, 'register.html', {'registration_form': registration_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
+    return render(request, 'register.html', {"payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
+
 
 
 def profile(request):
@@ -105,3 +91,5 @@ def profile(request):
     args['years'] = range(2011, 2036)
     args['soon'] = datetime.date.today() + datetime.timedelta(days=30)
 """
+
+#return redirect('/profile')
