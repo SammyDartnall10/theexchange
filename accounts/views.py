@@ -79,15 +79,15 @@ def register(request):
                     
                     #redirect('/profile')
                     
-                except stripe.CardError:
-                    registration_form.add_error("The card has been declined")
+                except stripe.error.CardError:
+                    messages.error(request, "Your card was declined!")
                 
     else:
         registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
         
-    return render(request, 'register.html', {'registration_form': registration_form})
+    return render(request, 'register.html', {'registration_form': registration_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
 
 
 def profile(request):

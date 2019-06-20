@@ -22,6 +22,7 @@
 
 
 <form role="form" method="post" id="payment-form" action="{% url 'register' %}">
+        {% csrf_token %}
     <legend>Payment Details</legend>
 
     <div id="credit-card-errors" style="display: none;">
@@ -29,14 +30,13 @@
     </div>
 
     <div class="form-group col-md-6">
-        {{ order_form }}
+        {{ registration_form.as_p }}
     </div>
 
     <div class="form-group col-md-6">
-        {{ payment_form }}
+        {{ payment_form.as_p }}
     </div>
 
-    {% csrf_token %}
     <div class="form-group col-md-12">
         <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
     </div>

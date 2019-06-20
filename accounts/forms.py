@@ -26,9 +26,7 @@ class UserRegistrationForm(ModelForm):
         model = CustomUser
         fields = ['email', 'username', 'password1', 'password2']
         
-            
-    def add_error(self, message):
-        self._errors[NON_FIELD_ERRORS] = self.error_class([message])
+    
         
     def clean_email(self):
         email = self.cleaned_data.get('email')
