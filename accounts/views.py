@@ -47,38 +47,49 @@ def login(request):
 
 
 stripe.api_key = settings.STRIPE_PUBLISHABLE
-
+    
+    
 def register(request):
     """Render the registration page"""
     if request.user.is_authenticated:
         return redirect(reverse('profile'))
 
     if request.method == "POST":
+        registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
 
-        if payment_form.is_valid():
+        if registration_form.is_valid() and payment_form.is_valid():
                 try: 
                     customer = stripe.Charge.create(
                         amount = 499,
                         currency = "USD",
-                        description = "one off payment",
+                        description = registration_form.cleaned_data['email'],
                         card = payment_form.cleaned_data['stripe_id'], 
                         )
-                    print(customer)
-                    messages.success(request, "Payment successful")
+                        
+                    registration_form.save()
                     
-                    return redirect('/profile')
-
+                    user = auth.authenticate(username=request.POST['username'],
+                                            password=request.POST['password1'])
+                    
+                    if user:
+                        auth.login(user=user, request=request)
+                        messages.success(request, "You have successfully registered/Payment Successful")
+                        
+                    else:
+                        messages.error(request, "Unable to register your account at this time")
+                    
+                    
                 except stripe.error.CardError:
-                    messages.error(request, "Payment failed")
+                    messages.error(request, "Your card was declined!")
         else:
-            messages.error(request, "Form not valid")
+            messages.error(request, "Form not valid")   
     else:
+        registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
-        messages.error(request, "Method not POST")
 
         
-    return render(request, 'register.html', {"payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
+    return render(request, 'register.html', {'registration_form': registration_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
 
                     
 
@@ -98,3 +109,4 @@ def profile(request):
 """
 
 #return redirect('/profile')
+
