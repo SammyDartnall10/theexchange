@@ -64,7 +64,9 @@ def register(request):
                         description = "one off payment",
                         card = payment_form.cleaned_data['stripe_id'], 
                         )
+                    print(customer)
                     messages.success(request, "Payment successful")
+                    
                     return redirect('/profile')
 
                 except stripe.error.CardError:
