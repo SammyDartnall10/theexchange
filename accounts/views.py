@@ -43,10 +43,9 @@ def login(request):
     else:
         login_form = UserLoginForm()
     return render(request, 'login.html', {'login_form': login_form})
+    
 
-
-
-stripe.api_key = settings.STRIPE_PUBLISHABLE
+stripe.api_key = settings.STRIPE_SECRET
     
     
 def register(request):
@@ -57,8 +56,9 @@ def register(request):
     if request.method == "POST":
         registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
-
+        
         if registration_form.is_valid() and payment_form.is_valid():
+                print(payment_form)
                 try: 
                     customer = stripe.Charge.create(
                         amount = 499,

@@ -1,3 +1,5 @@
+
+
 <!--Scripts in head local only to register page - reduce overhead-->
 {% extends 'base.html' %}
 {% load static from staticfiles %}
@@ -12,7 +14,7 @@
 <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
 
-{% endblock %}
+{% endblock head_js%}
 
 {% block page_heading %}New User SignUp{% endblock %}
 
