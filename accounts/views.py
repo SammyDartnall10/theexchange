@@ -58,32 +58,39 @@ def register(request):
         payment_form = MakePaymentForm(request.POST)
         
         if registration_form.is_valid() and payment_form.is_valid():
-                try: 
-                    customer = stripe.Charge.create(
-                        amount = 499,
-                        currency = "CAD",
-                        description = registration_form.cleaned_data['email'],
-                        card = payment_form.cleaned_data['stripe_id'], 
-                        )
-                        
-                    registration_form.save()
+            try: 
+                customer = stripe.Charge.create(
+                    amount = 499,
+                    currency = "CAD",
+                    description = registration_form.cleaned_data['email'],
+                    card = payment_form.cleaned_data['stripe_id'], 
+                    )
+                messages.success(request, "Payment made")
+                
+            except stripe.error.CardError:
+                messages.error(request, "Your card was declined!")
+                
+            print(request.POST['username'])
+            print(request.POST['password1'])
+                
+            registration_form.save()
+            
+            print(request.POST['username'])
+            print(request.POST['password1'])
+            
+            user = auth.authenticate(username=request.POST['username'],
+                                    password=request.POST['password1'])
+            print(user)
+            
+            if user:
+                auth.login(user=user, request=request)
+                messages.success(request, "You have successfully registered")
+                return redirect(reverse('profile'))
+            
+            else:
+                messages.error(request, "Unable to register your account at this time")
                     
-                    user = auth.authenticate(username=request.POST['username'],
-                                            password=request.POST['password1'])
-                    
-                    messages.success(request, "Payment made")
-                    
-                    if user:
-                        auth.login(user=user, request=request)
-                        messages.success(request, "You have successfully registered")
-                        return redirect(reverse('profile'))
-                    
-                    else:
-                        messages.error(request, "Unable to register your account at this time")
-                    
-                    
-                except stripe.error.CardError:
-                    messages.error(request, "Your card was declined!")
+                
         else:
             messages.error(request, "Form not valid")   
     else:
