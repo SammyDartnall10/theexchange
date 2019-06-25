@@ -47,8 +47,33 @@ def login(request):
 
 stripe.api_key = settings.STRIPE_SECRET
     
-    
 def register(request):
+    """Render the registration page"""
+    if request.user.is_authenticated:
+        return redirect(reverse('index'))
+
+    if request.method == "POST":
+        registration_form = UserRegistrationForm(request.POST)
+
+        if registration_form.is_valid():
+            registration_form.save()
+
+            user = auth.authenticate(username=request.POST['username'],
+                                     password=request.POST['password1'])
+            print(user)
+            
+            if user:
+                auth.login(user=user, request=request)
+                messages.success(request, "You have successfully registered")
+            else:
+                messages.error(request, "Unable to register your account at this time")
+    else:
+        registration_form = UserRegistrationForm()
+    return render(request, 'register.html', {
+        "registration_form": registration_form})
+        
+        
+def stripeRegister(request):
     """Render the registration page"""
     if request.user.is_authenticated:
         return redirect(reverse('profile'))
@@ -58,6 +83,7 @@ def register(request):
         payment_form = MakePaymentForm(request.POST)
         
         if registration_form.is_valid() and payment_form.is_valid():
+            
             try: 
                 customer = stripe.Charge.create(
                     amount = 499,
@@ -65,12 +91,12 @@ def register(request):
                     description = registration_form.cleaned_data['email'],
                     card = payment_form.cleaned_data['stripe_id'], 
                     )
+                registration_form.save()
                 messages.success(request, "Payment made")
                 
             except stripe.error.CardError:
                 messages.error(request, "Your card was declined!")
                 
-            registration_form.save()
             
             print(request.POST['username'])
             print(request.POST['password1'])
