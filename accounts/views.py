@@ -70,9 +70,6 @@ def register(request):
             except stripe.error.CardError:
                 messages.error(request, "Your card was declined!")
                 
-            print(request.POST['username'])
-            print(request.POST['password1'])
-                
             registration_form.save()
             
             print(request.POST['username'])
