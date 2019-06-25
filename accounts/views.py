@@ -71,10 +71,13 @@ def register(request):
                     user = auth.authenticate(username=request.POST['username'],
                                             password=request.POST['password1'])
                     
+                    messages.success(request, "Payment made")
+                    
                     if user:
                         auth.login(user=user, request=request)
-                        messages.success(request, "You have successfully registered/Payment Successful")
-                        
+                        messages.success(request, "You have successfully registered")
+                        return redirect(reverse('profile'))
+                    
                     else:
                         messages.error(request, "Unable to register your account at this time")
                     
