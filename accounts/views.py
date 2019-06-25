@@ -58,11 +58,10 @@ def register(request):
         payment_form = MakePaymentForm(request.POST)
         
         if registration_form.is_valid() and payment_form.is_valid():
-                print(payment_form)
                 try: 
                     customer = stripe.Charge.create(
                         amount = 499,
-                        currency = "USD",
+                        currency = "CAD",
                         description = registration_form.cleaned_data['email'],
                         card = payment_form.cleaned_data['stripe_id'], 
                         )
