@@ -11,6 +11,7 @@ from django.conf import settings
 import datetime
 import stripe
 
+
 def about(request):
     """Return the index.html file"""
     return render(request, 'index.html')
@@ -47,7 +48,7 @@ def login(request):
 
 stripe.api_key = settings.STRIPE_SECRET
     
-def register(request):
+def dummyregister(request):
     """Render the registration page"""
     if request.user.is_authenticated:
         return redirect(reverse('index'))
@@ -73,7 +74,7 @@ def register(request):
         "registration_form": registration_form})
         
         
-def stripeRegister(request):
+def register(request):
     """Render the registration page"""
     if request.user.is_authenticated:
         return redirect(reverse('profile'))
@@ -91,7 +92,7 @@ def stripeRegister(request):
                     description = registration_form.cleaned_data['email'],
                     card = payment_form.cleaned_data['stripe_id'], 
                     )
-                registration_form.save()
+               
                 messages.success(request, "Payment made")
                 
             except stripe.error.CardError:
@@ -100,6 +101,8 @@ def stripeRegister(request):
             
             print(request.POST['username'])
             print(request.POST['password1'])
+            
+            registration_form.save()
             
             user = auth.authenticate(username=request.POST['username'],
                                     password=request.POST['password1'])
