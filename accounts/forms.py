@@ -63,8 +63,6 @@ class CompanyDetailForm(forms.ModelForm):
         model = CompanyDetail
         fields = ('industry', 'contact_email', 'about_us', 'logo')
         
-        company_id = forms.CharField(widget=forms.HiddenInput)
-        
 #--------------------------------------------------------------------------------------------------------------------------------
 """    
 class OrderForm(forms.ModelForm):

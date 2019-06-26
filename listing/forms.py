@@ -1,5 +1,6 @@
 from django import forms
-from .models import Listing
+from .models import Listing, ListingArchive
+
 
 """
 comment out while fixing forms...
@@ -19,9 +20,15 @@ class ImageUploadForm(forms.Form):
     """Image upload form."""
     image = forms.ImageField()
 
+class NewListingArchive(forms.ModelForm):
+    class Meta:
+        model = ListingArchive
+        fields = ('title', 'content', 'contact', 'image', 'tag', 'can_offer')
+
 class NewListing(forms.ModelForm):
     class Meta:
         model = Listing
-        fields = ('title', 'content', 'contact', 'image', 'tag', 'can_offer')
+        exclude = ['user']
+        # exclude user from here so it doesnt come through as a field to be filled in in the html
         
 

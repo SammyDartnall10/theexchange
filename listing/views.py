@@ -1,12 +1,12 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseForbidden, HttpResponse
-from .forms import NewListing
+from .forms import NewListing, NewListingArchive
 from .models import Listing
 
 # Create your views here.
 
-def create_listing(request):
+def create_listing_archive(request):
     print(request.user)
     if not request.user.is_authenticated:
         return redirect('login')
@@ -32,6 +32,19 @@ def get_listings(request):
     """
     listings = Listing.objects.all()
     return render(request, "exchange.html", {'listings': listings})
+    
+def create_listing(request):
+    if request.method == 'POST':
+        form = NewListing(request.POST, request.FILES)
+        if form.is_valid():
+            listing = form.save(commit=False)
+            listing.user = request.user  # The logged-in user - re-fill in this field automatically
+            listing.save()
+            return redirect('/')
+    else:
+        form = NewListing()
+    return render(request, 'createnew.html', {'form': form})
+    
     
 """
 def create_listing(request, pk=None):
