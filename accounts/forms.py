@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
-from accounts.models import CustomUser
+from accounts.models import CustomUser, CompanyDetail
 
 class UserLoginForm(forms.Form):
     """Forms to be used by users to login"""
@@ -57,6 +57,14 @@ class MakePaymentForm(forms.Form):
     expiry_month = forms.ChoiceField(label="Month", choices=MONTH_CHOICES, required=False)
     expiry_year = forms.ChoiceField(label="Year", choices=YEAR_CHOICES, required=False)
     stripe_id = forms.CharField(widget=forms.HiddenInput)
+    
+class CompanyDetailForm(forms.ModelForm):
+    class Meta:
+        model = CompanyDetail
+        fields = ('industry', 'contact_email', 'about_us', 'logo')
+        
+        company_id = forms.CharField(widget=forms.HiddenInput)
+        
 #--------------------------------------------------------------------------------------------------------------------------------
 """    
 class OrderForm(forms.ModelForm):

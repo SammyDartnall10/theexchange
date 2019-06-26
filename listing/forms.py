@@ -22,5 +22,6 @@ class ImageUploadForm(forms.Form):
 class NewListing(forms.ModelForm):
     class Meta:
         model = Listing
-        fields = ('title', 'content', 'contact', 'image', 'tag')
+        fields = ('title', 'content', 'contact', 'image', 'tag', 'can_offer')
+        
 

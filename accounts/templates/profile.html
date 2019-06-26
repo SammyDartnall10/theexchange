@@ -7,6 +7,17 @@
 {% block content %}
 <p> {{ profile.email }} </p>
 <div>
+    <h1>Edit Profile</h1></h1>
+    <div>
+        <form role="form" method="POST" id="edit-profile" action="{% url 'edit_profile' %}">
+            {% csrf_token %}
+            <div class="form-group col-md-12">
+                <input class=" btn btn-primary" id="edit_profile_btn" name="profile" type="submit" value="Edit Profile">
+            </div>
+        </form>
+    </div>
+</div>
+<div>
     <h1>My Listings</h1>
     <div>
         <p>for loop for listings here</p>

@@ -6,7 +6,30 @@ from django.db import models
 class CustomUser(models.Model):
     username = models.CharField(max_length=255)
     email = models.EmailField()
-    #stripe_id = models.CharField(max_length=255)
+    
+class CompanyDetail(models.Model):    
+    INDUSTRY = (
+            ('Agriculture, forestry, fishing and hunting', 'Agriculture, forestry, fishing and hunting'),
+            ('Construction', 'Construction'),
+            ('Manufacturing', 'Manufacturing'),
+            ('Transportation equipment manufacturing', 'Transportation equipment manufacturing'),
+            ('Service industries', 'Service industries'),
+            ('Wholesale Trade', 'Wholesale Trade'),
+            ('Retail Trade', 'Retail Trade'),
+            ('Transportation and warehousing', 'Transportation and warehousing'),
+            ('Information and cultural industries', 'Information and cultural industries'),
+            ('Finance and insurance', 'Finance and insurance'),
+            ('Real estate and rental and leasing', 'Real estate and rental and leasing'),
+            ('Professional, scientific, and technical services', 'Professional, scientific, and technical services'),
+            ('Management of companies and enterprises', 'Management of companies and enterprises'),
+            ('Administrative and support, waste management and remediation services', 'Administrative and support, waste management and remediation services'),
+            ('Mining, quarrying, and oil and gas extraction', 'Mining, quarrying, and oil and gas extraction'),
+        )
+        
+    industry = models.CharField(max_length=1, choices=INDUSTRY)
+    contact_email = models.EmailField()
+    about_us = models.CharField(max_length=254, default="Company Information")
+    logo = models.ImageField(upload_to='images', null=False)
     
 """
 from django.db import models

@@ -126,12 +126,16 @@ def register(request):
         
     return render(request, 'register.html', {'registration_form': registration_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
 
-                    
-
 def profile(request):
     """The user's profile page"""
     user = User.objects.get(email=request.user.email)
-    return render(request, 'profile.html', {"profile": user})
+    return render(request, 'profile.html', {"profile": user})                    
+
+def edit_profile(request):
+    """The user's profile page"""
+    user = User.objects.get(email=request.user.email)
+    company_info = User.objects.get()
+    return render(request, 'edit_profile.html', {"profile": user}, {"company": company_info})
     
 #--------------------------------------------------------------------------------------------------------------------------------
 """args = {}
