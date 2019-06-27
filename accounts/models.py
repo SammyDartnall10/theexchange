@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 # Custom Model for use in registration form
@@ -26,10 +27,11 @@ class CompanyDetail(models.Model):
             ('Mining, quarrying, and oil and gas extraction', 'Mining, quarrying, and oil and gas extraction'),
         )
         
-    industry = models.CharField(max_length=1, choices=INDUSTRY)
-    contact_email = models.EmailField()
-    about_us = models.CharField(max_length=254, default="Company Information")
+    industry = models.CharField(max_length=1, choices=INDUSTRY, default="Industry")
+    contact_email = models.EmailField(default="contact email")
+    about_us = models.CharField(max_length=254, default="Information about your company - where you're from, what you do!")
     logo = models.ImageField(upload_to='images', null=False)
+    created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
     
 """
 from django.db import models

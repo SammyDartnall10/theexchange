@@ -61,7 +61,10 @@ class MakePaymentForm(forms.Form):
 class CompanyDetailForm(forms.ModelForm):
     class Meta:
         model = CompanyDetail
-        fields = ('industry', 'contact_email', 'about_us', 'logo')
+        exclude = ['created_by']
+        #fields = ('industry', 'contact_email', 'about_us', 'logo')
+        # exclude user from here so it doesnt come through as a field to be filled in in the htm
+
         
 #--------------------------------------------------------------------------------------------------------------------------------
 """    

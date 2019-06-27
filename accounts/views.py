@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from accounts.forms import UserLoginForm, UserRegistrationForm, MakePaymentForm
 from django.conf import settings
+from listing.models import Listing
+
 import datetime
 import stripe
 
@@ -47,32 +49,6 @@ def login(request):
     
 
 stripe.api_key = settings.STRIPE_SECRET
-    
-def dummyregister(request):
-    """Render the registration page"""
-    if request.user.is_authenticated:
-        return redirect(reverse('index'))
-
-    if request.method == "POST":
-        registration_form = UserRegistrationForm(request.POST)
-
-        if registration_form.is_valid():
-            registration_form.save()
-
-            user = auth.authenticate(username=request.POST['username'],
-                                     password=request.POST['password1'])
-            print(user)
-            
-            if user:
-                auth.login(user=user, request=request)
-                messages.success(request, "You have successfully registered")
-            else:
-                messages.error(request, "Unable to register your account at this time")
-    else:
-        registration_form = UserRegistrationForm()
-    return render(request, 'register.html', {
-        "registration_form": registration_form})
-        
         
 def register(request):
     """Render the registration page"""
@@ -129,23 +105,15 @@ def register(request):
 def profile(request):
     """The user's profile page"""
     user = User.objects.get(email=request.user.email)
-    return render(request, 'profile.html', {"profile": user})                    
+    listings = Listing.objects.filter(created_by = request.user)
+    print(listings)
+    print(type(listings))
+    return render(request, 'profile.html', {"profile": user, "listings": listings})                    
 
 def edit_profile(request):
     """The user's profile page"""
-    user = User.objects.get(email=request.user.email)
-    company_info = User.objects.get()
+    user = User.objects.get(id = request.user.id)
+    company_info = User.objects.filter(id = request.user.id)
     return render(request, 'edit_profile.html', {"profile": user}, {"company": company_info})
-    
-#--------------------------------------------------------------------------------------------------------------------------------
-"""args = {}
-    args.update(csrf(request))
-    args['form'] = registration_form
-    args['publishable'] = settings.STRIPE_PUBLISHABLE
-    args['months'] = range(1, 12)
-    args['years'] = range(2011, 2036)
-    args['soon'] = datetime.date.today() + datetime.timedelta(days=30)
-"""
 
-#return redirect('/profile')
 

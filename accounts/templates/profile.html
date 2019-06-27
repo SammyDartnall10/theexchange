@@ -17,14 +17,32 @@
         </form>
     </div>
 </div>
-<div>
-    <h1>My Listings</h1>
-    <div>
-        <p>for loop for listings here</p>
+
+<h1> My Listings </h1>
+
+<div class="row row-flex">
+    {% for listing in listings %}
+        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
+            <div class="panel-body">
+                <div>
+                    <img class="listing" src="{{ MEDIA_URL }}{{ listing.image }}">
+                </div>
+                <h3>{{ listing.title }}</h3>
+                <p class="listing-content">{{ listing.content }}</p>
+            </div>
+            <div>
+        <form role="form" method="POST" id="listing_detail" action="{% url 'listing_detail' listing.id %}">
+            {% csrf_token %}
+            <div class="form-group ">
+                <input class=" btn btn-primary" id="listing_detail_btn" name="listing_detail" type="submit" value="See Detail">
+            </div>
+        </form>
     </div>
-</div>    
-    
+        </div>
+    {% endfor %}
+</div>
 
 <p><a href="{% url 'listing' %}">New Listing</a></p>
+
 
 {% endblock %}
