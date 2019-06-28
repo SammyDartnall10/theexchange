@@ -1,7 +1,8 @@
 
 # Create your views here. - Have come from forms.py
 
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponseForbidden, HttpResponse
 from django.template.context_processors import csrf
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,7 @@ from django.contrib.auth.models import User
 from accounts.forms import UserLoginForm, UserRegistrationForm, MakePaymentForm
 from django.conf import settings
 from listing.models import Listing
+from company.models import CompanyDetail
 
 import datetime
 import stripe
@@ -106,14 +108,25 @@ def profile(request):
     """The user's profile page"""
     user = User.objects.get(email=request.user.email)
     listings = Listing.objects.filter(created_by = request.user)
+    company = CompanyDetail.objects.get(created_by = request.user)
     print(listings)
     print(type(listings))
-    return render(request, 'profile.html', {"profile": user, "listings": listings})                    
-
-def edit_profile(request):
-    """The user's profile page"""
-    user = User.objects.get(id = request.user.id)
-    company_info = User.objects.filter(id = request.user.id)
-    return render(request, 'edit_profile.html', {"profile": user}, {"company": company_info})
+    return render(request, 'profile.html', {"profile": user, "listings": listings, "company": company})                    
 
 
+
+def edit_profile(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    print(user.username)
+    if request.user.is_authenticated and request.user == request.user or request.user.is_superuser: 
+        if request.method == "POST":
+            form = UserRegistrationForm(request.POST, request.FILES, instance=user)
+            if form.is_valid():
+                listing = form.save()
+                return redirect('profile.html')        
+        else:
+            form = UserRegistrationForm(instance=user)
+    else: 
+        return HttpResponseForbidden()
+        
+    return render(request, 'edit_profile.html', {'user': user, "form":form})

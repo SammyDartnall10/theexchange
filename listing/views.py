@@ -26,7 +26,6 @@ def create_listing(request):
     return render(request, 'createnew.html', {'form': form})
     
 def edit_listing(request, pk):
-    
     listing = get_object_or_404(Listing, pk=pk)
     if request.user.is_authenticated and request.user == listing.created_by or request.user.is_superuser: 
         if request.method == "POST":
@@ -44,11 +43,8 @@ def edit_listing(request, pk):
     
 def listing_detail(request, pk):
     """
-    Create a view that returns a single
-    Post object based on the post ID (pk) and
-    render it to the 'postdetail.html' template.
-    Or return a 404 error if the post is
-    not found
+    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
+    Or return a 404 error if the post is not found
     """
     listing = get_object_or_404(Listing, pk=pk)
     return render(request, "listing_detail.html", {'listing': listing})   

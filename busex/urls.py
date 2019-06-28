@@ -23,6 +23,7 @@ from about import urls as urls_about
 from exchange import urls as urls_exchange
 from accounts import urls as urls_account
 from listing import urls as urls_listing
+from company import urls as urls_company
 from django.views.static import serve
 from django.conf import settings
 from .settings import MEDIA_ROOT
@@ -35,6 +36,7 @@ urlpatterns = [
     path('exchange', include('exchange.urls')),
     path('accounts/', include('accounts.urls')),
     path('listing/', include('listing.urls')),
+    path('company/', include('company.urls')),
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT }),
 ]
 
