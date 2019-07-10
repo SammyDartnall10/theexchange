@@ -2,17 +2,44 @@
 {% block content %}
     <div class="row">
         
-        <div class="col-sm-10 col-md-9">
-            <h3>{{ company.industy }}</h3>
-            <div class="row">
-                <div class="col-xs-9">
-                    <p>{{ comapany.about_us }}</p>
-                    <p>{{ comapany.email }}</p>
-                    <a href="{% url 'profile' %}" class="btn btn-default">Back to Profile</a>
-                    <a href="{% url 'edit_company' company.id %}" class="btn btn-default">Edit Company Details</a>
-                    <hr>
-                </div>
-            </div>
+        <div class="col-md-6">
+            <span><h3>{{ company.business_name }}</h3></span>
+            <span><p>{{ company.contact_email }}</p></span>
         </div>
+        
+        <div class="col-sm-10 col-md-4">
+            <img class="profile_image resize" src="{{ MEDIA_URL }}{{ company.logo }}" alt="Card image cap">
+        </div>
+        
+        <div class="col-md-6">
+            <h5>About Us/Bio:</h5> <p>{{ company.about_us }}</p>
+        </div>
+        
+        <div class="col-md-6">
+            <h5>Primary Industry:</h5> <p>{{ company.industry }}</p>
+        </div>
+        
+        <div class="col-md-6">
+            <h5>Registered Business Address:</h5> <p>{{ company.address }}</p>
+        </div>
+        
+        <div class="col-md-6">
+            <h5>Overall Rating:</h5> <p>{{ company.overall_rating }}</p>
+        </div>
+        
+        <div>
+            <a href="{% url 'profile' %}" class="btn btn-default">Back to Profile</a>
+            <a href="{% url 'edit_company' company.id %}" class="btn btn-default">Edit Company Details</a>
+        </div>    
     </div>
+    
 {% endblock %}
+
+
+ industry = models.CharField(max_length=254, null=True, choices=INDUSTRY, default="Please pick an industry", blank=True)
+    contact_email = models.EmailField(default="email@email.com", null=True, blank=True)
+    about_us = models.CharField(max_length=254, null=True, default="Information about your company - where you're from, what you do!", blank=True)
+    address = models.CharField(max_length=254, null=True, default="Business Address", blank=True)
+    logo = models.ImageField(upload_to='images', null=True, blank=True)
+    created_by = models.ForeignKey(User, null=True, default=1, on_delete=models.SET_DEFAULT)
+    overall_rating

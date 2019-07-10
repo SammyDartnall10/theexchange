@@ -11,6 +11,10 @@ h1 {
     color: green;
 }
 
+body { 
+    padding-top: 65px; 
+}
+
 .button {
     -webkit-appearance: button;
     -moz-appearance: button;
@@ -22,6 +26,10 @@ h1 {
 
 .company_form{
     display: none;
+}
+
+.profile_image{
+    max-width: 30vw;
 }
 
 /*.nonfield {
