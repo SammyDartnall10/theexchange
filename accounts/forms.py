@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from accounts.models import CustomUser
+from company.models import CompanyDetail
 
 class UserLoginForm(forms.Form):
     """Forms to be used by users to login"""
@@ -58,7 +59,9 @@ class MakePaymentForm(forms.Form):
     expiry_year = forms.ChoiceField(label="Year", choices=YEAR_CHOICES, required=False)
     stripe_id = forms.CharField(widget=forms.HiddenInput)
     
-
+class CompanyDetail(forms.Form):
+    class Meta: 
+        model = CompanyDetail
 
         
 #--------------------------------------------------------------------------------------------------------------------------------

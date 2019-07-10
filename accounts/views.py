@@ -7,10 +7,12 @@ from django.template.context_processors import csrf
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user
 from accounts.forms import UserLoginForm, UserRegistrationForm, MakePaymentForm
 from django.conf import settings
 from listing.models import Listing
 from company.models import CompanyDetail
+from company.forms import CompanyDetailForm
 
 import datetime
 import stripe
@@ -60,6 +62,7 @@ def register(request):
     if request.method == "POST":
         registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
+        company_form = CompanyDetailForm(request.POST)
         
         if registration_form.is_valid() and payment_form.is_valid():
             
@@ -82,13 +85,25 @@ def register(request):
             
             registration_form.save()
             
+            
             user = auth.authenticate(username=request.POST['username'],
                                     password=request.POST['password1'])
             print(user)
             
+            
+            
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully registered")
+                
+                if company_form.is_valid():
+                    company = company_form.save(commit=False)
+                    company.created_by = request.user # The logged-in user - re-fill in this field automatically
+                    company_form.save()
+                
+                else:
+                    messages.error(request, "CompanyDetailForm not valid")
+                
                 return redirect(reverse('profile'))
             
             else:
@@ -96,21 +111,25 @@ def register(request):
                     
                 
         else:
-            messages.error(request, "Form not valid")   
+            messages.error(request, "Form not valid") 
+            
     else:
         registration_form = UserRegistrationForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
+        company_form = CompanyDetailForm(request.POST)
 
         
-    return render(request, 'register.html', {'registration_form': registration_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
+    return render(request, 'register.html', {'registration_form': registration_form, "payment_form": payment_form, 'company_form': company_form, "publishable": settings.STRIPE_PUBLISHABLE})
+
 
 def profile(request):
     """The user's profile page"""
     user = User.objects.get(email=request.user.email)
     listings = Listing.objects.filter(created_by = request.user)
-    company = CompanyDetail.objects.get(created_by = request.user)
-    print(listings)
-    print(type(listings))
+    if CompanyDetail.objects.get(created_by = request.user):
+        company = CompanyDetail.objects.get(created_by = request.user)
+    else: 
+        company = CompanyDetail.objects.get(created_by = 'admin2')
     return render(request, 'profile.html', {"profile": user, "listings": listings, "company": company})                    
 
 

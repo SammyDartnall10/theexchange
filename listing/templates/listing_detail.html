@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        
+        <div class="col-sm-10 col-md-9">
+            <h3>{{ listing.title }}</h3>
+            <div class="row">
+                <div class="col-xs-9">
+                    <p>{{ post.content }}</p>
+                    
+                    <a href="{% url 'profile' %}" class="btn btn-default">Back to Profile</a>
+                    <a href="{% url 'edit_listing' listing.id %}" class="btn btn-default">Edit Details</a>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

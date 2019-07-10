@@ -20,6 +20,10 @@ h1 {
     color: blue;
 }
 
+.company_form{
+    display: none;
+}
+
 /*.nonfield {
     display: none;
 }

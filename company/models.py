@@ -19,11 +19,11 @@ class CompanyDetail(models.Model):
             ('Professional, scientific, and technical services', 'Professional, scientific, and technical services'),
             ('Management of companies and enterprises', 'Management of companies and enterprises'),
             ('Administrative and support, waste management and remediation services', 'Administrative and support, waste management and remediation services'),
-            ('Mining, quarrying, and oil and gas extraction', 'Mining, quarrying, and oil and gas extraction'),
         )
         
-    industry = models.CharField(max_length=254, choices=INDUSTRY, default="Industry")
-    contact_email = models.EmailField(default="contact email")
-    about_us = models.CharField(max_length=254, default="Information about your company - where you're from, what you do!")
-    logo = models.ImageField(upload_to='images', null=False)
-    created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
+    industry = models.CharField(max_length=254, null=True, choices=INDUSTRY, default="Please pick an industry", blank=True)
+    contact_email = models.EmailField(default="email@email.com", null=True, blank=True)
+    about_us = models.CharField(max_length=254, null=True, default="Information about your company - where you're from, what you do!", blank=True)
+    address = models.CharField(max_length=254, null=True, default="Business Address", blank=True)
+    image = models.ImageField(upload_to='images', null=True, blank=True)
+    created_by = models.ForeignKey(User, null=True, default=1, on_delete=models.SET_DEFAULT)

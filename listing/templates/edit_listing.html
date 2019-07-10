@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1> Edit Listing </h1>
+
+<div>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} 
+    {{ form.as_p}}
+    <button type="submit" class="btn btn-info">Save</button>
+</form>
+</div>
+
+{% endblock %}
