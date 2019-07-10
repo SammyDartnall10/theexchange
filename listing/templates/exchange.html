@@ -16,7 +16,7 @@
       <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
       <div class="card-body">
         <a href=""><h3 class="card-title">{{ listing.title }}</h3></a>
-        <p class="card-text">{{ listing.content }}</p>
+        <p class="card-text">{{ listing.content|truncatewords:20 }}</p>
       </div>
       <div class="card-footer">
         
