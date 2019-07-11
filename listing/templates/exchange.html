@@ -22,6 +22,20 @@
     </form>
 </div>
 
+<div id="form-content">
+    <form action="{% url 'company_search' %}" method="POST">
+        {% csrf_token %}
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <label for="searchCompany">Search for a business</label>
+            <input name="search-company" type="text">
+            <input type="submit" id='submit' class='btn btn-dark type-search' value="Search" />
+        </div>
+      </div>
+    </form>
+</div>
+
+
   
   {% for listing in listings %}
   <div class="col-md-4">

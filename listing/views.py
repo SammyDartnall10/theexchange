@@ -2,19 +2,33 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseForbidden, HttpResponse
 from .forms import NewListing, NewListingArchive
+from django.contrib.auth.models import User
 from .models import Listing
 
 # Create your views here.
     
 def filtered_listings(request):
     """
-    search based on text input
+    search based on text input - returns listings
     """
     if request.method =="POST":
         search_criteria = request.POST.get('search-listings')
         print(search_criteria)
         listings = Listing.objects.filter(tag__contains=search_criteria)
         return render(request, "filtered_results.html", {'listings': listings})
+    else:
+        return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")
+        
+def company_search(request):
+    """
+    search for users based on name
+    """
+    if request.method =="POST":
+        search_criteria = request.POST.get('search-company')
+        print(search_criteria)
+        company = User.objects.get(username__contains=search_criteria)
+        print(company)
+        return render(request, "view_company.html", {'company': company})
     else:
         return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")
     
