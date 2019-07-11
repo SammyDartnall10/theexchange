@@ -6,6 +6,18 @@ from .models import Listing
 
 # Create your views here.
     
+def filtered_listings(request):
+    """
+    search based on text input
+    """
+    if request.method =="POST":
+        search_criteria = request.POST.get('search-listings')
+        print(search_criteria)
+        listings = Listing.objects.filter(tag__contains=search_criteria)
+        return render(request, "filtered_results.html", {'listings': listings})
+    else:
+        return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")
+    
 def get_listings(request):
     """
     pulls in all lisitings in one query set
