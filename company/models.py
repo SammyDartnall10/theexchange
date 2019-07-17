@@ -41,7 +41,8 @@ class CompanyReview(models.Model):
         )
     
     created_by = models.ForeignKey(User, null=True, default=1, on_delete=models.SET_DEFAULT)
-    company_reviewed = models.CharField(max_length=254, null=True, default="Please pick an industry", blank=False)
-    content = models.CharField(max_length=254, null=True, default="Review Content", blank=False)
+    company_reviewed = models.ForeignKey(CompanyDetail, null=True, default="Default Business Name", on_delete=models.SET_DEFAULT)
+    content = models.TextField(max_length=254, null=True, default="Review Content", blank=False)
     rating = models.IntegerField(choices=RATINGS, blank=False)
     date_created = models.DateTimeField(blank=True, null=True, default=timezone.now)
+    

@@ -13,6 +13,22 @@
     </form>
 </div>
 
+ <!-- Successful review added message -->
+    <div>
+        {% if messages %}
+
+        <br><br><br>
+        <div class="alert alert-success">
+            <div class="messages">
+    
+                {% for message in messages %} 
+                    {{ message }} 
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+        {% endif %}
+
     <div class="row">
         
         <div class="col-md-6">
@@ -41,31 +57,45 @@
         </div>
            
     </div>
-    
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<div class="row">
+    <div class="col">
+        
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#reviewModal">Add a review</button>
     </div>
-  </div>
-</div>
     
+    <!-- Modal -->
+    <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">{{ company.business_name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <div class="modal-body">
+                    <div id="form-content">
+                        <form action="{% url 'add_company_review' company.business_name %}" method="POST">
+                            {% csrf_token %}
+                          <div class="row">
+                            <div class="col-12 col-md-6">
+                              <label for="searchCompany">Add a Review</label>
+                                  {{ company_form.as_p }}
+                                <input type="submit" id='add_review' class='btn btn-dark type-search' value="Add_Review" />
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ooops- take me back!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

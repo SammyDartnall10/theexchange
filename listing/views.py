@@ -19,18 +19,7 @@ def filtered_listings(request):
     else:
         return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")
         
-def company_search(request):
-    """
-    search for users based on name
-    """
-    if request.method =="POST":
-        search_criteria = request.POST.get('search-company')
-        print(search_criteria)
-        company = User.objects.get(username__contains=search_criteria)
-        print(company)
-        return render(request, "view_company.html", {'company': company})
-    else:
-        return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")
+
     
 def get_listings(request):
     """
@@ -38,6 +27,8 @@ def get_listings(request):
     """
     listings = Listing.objects.all()
     return render(request, "exchange.html", {'listings': listings})
+    
+    
     
 def create_listing(request):
     if request.method == 'POST':
@@ -50,6 +41,8 @@ def create_listing(request):
     else:
         form = NewListing()
     return render(request, 'createnew.html', {'form': form})
+    
+    
     
 def edit_listing(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
