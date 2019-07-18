@@ -1,58 +1,89 @@
 {% extends 'base.html' %}
 
-{% block page_heading %}<h4>{{ user }}'s Profile</h4> {% endblock %}
-<br>
+
 {% block content %}
-<p> {{ profile.email }} </p>
+<!---------------------------------------------------------------------------------------------------------------------------------------->
 
-
-
-<div>
-    <h1>Edit Profile</h1></h1>
-    <div>
+<div class="row">
+    <div class="col-sm-4">
+        <div>
+            <h4>{{ user }}'s Profile</h4> 
+        </div>
+            
+        <div>
+            <p> {{ profile.email }} </p>
+        </div>
+        <div>
+            <h5>Overall Rating:</h5>
+            
+            {% for key, value in avg_rating.items %}
+            <p>{{ value }}</p>
+            {% endfor %}    
+        </div>
         
         
-        <form role="form" method="POST" id="edit_profile" action="{% url 'edit_profile' profile.id %}">
-            {% csrf_token %}
-            <div class="form-group ">
-                <input class=" btn btn-primary" id="profile_detail_btn" name="profile_detail" type="submit" value="Edit Personal Details">
-            </div>
-        </form>
-        
-        <form role="form" method="POST" id="company_detail" action="{% url 'company_detail' company.id %}">
-            {% csrf_token %}
-            <div class="form-group ">
-                <input class=" btn btn-primary" id="company_detail_btn" name="company_detail" type="submit" value="Company Details">
-            </div>
-        </form>
-    </div>
-</div>
-
-<h1> My Listings </h1>
-
-<div class="row row-flex">
-    {% for listing in listings %}
-        <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
-            <div class="panel-body">
-                <div>
-                    <img class="listing" src="{{ MEDIA_URL }}{{ listing.image }}">
-                </div>
-                <h3>{{ listing.title }}</h3>
-                <p class="listing-content">{{ listing.content }}</p>
+        <div>
+            <div>
+                <h1>Edit Profile</h1></h1>
             </div>
             <div>
-        <form role="form" method="POST" id="listing_detail" action="{% url 'listing_detail' listing.id %}">
-            {% csrf_token %}
-            <div class="form-group ">
-                <input class=" btn btn-primary" id="listing_detail_btn" name="listing_detail" type="submit" value="See Detail">
+                <form role="form" method="POST" id="edit_profile" action="{% url 'edit_profile' profile.id %}">
+                    {% csrf_token %}
+                    <div class="form-group ">
+                        <input class=" btn btn-primary" id="profile_detail_btn" name="profile_detail" type="submit" value="Edit Personal Details">
+                    </div>
+                </form>
+                
+                <form role="form" method="POST" id="company_detail" action="{% url 'company_detail' company.id %}">
+                    {% csrf_token %}
+                    <div class="form-group ">
+                        <input class=" btn btn-primary" id="company_detail_btn" name="company_detail" type="submit" value="Company Details">
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
         </div>
-    {% endfor %}
+        <div>
+        <h5>Recent Reviews</h5>
+        </div>
+            {% for review in reviews %}
+              <div class="col">
+                    <h6>{{ review.created_by }}</h6>
+                    <p>{{ review.content|truncatewords:20 }}</p>
+              </div>
+             {% endfor %}
+        
+    </div>
+<!---------------------------------------------------------------------------------------------------------------------------------------->
+    
+    <div class="col-sm-8">
+        <h1> My Listings </h1>
+        <p><a href="{% url 'listing' %}">New Listing</a></p>
+        <div class="row row-flex">
+            {% for listing in listings %}
+              <div class="col-md-4">
+                <div class="card">
+                  <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
+                  <div class="card-body">
+                    <a href=""><h3 class="card-title">{{ listing.title }}</h3></a>
+                    <p class="card-text">{{ listing.content|truncatewords:20 }}</p>
+                    <form role="form" method="POST" id="listing_detail" action="{% url 'listing_detail' listing.id %}">
+                        {% csrf_token %}
+                        <div class="form-group ">
+                            <input class=" btn btn-primary" id="listing_detail_btn" name="listing_detail" type="submit" value="See Detail">
+                        </div>
+                    </form>
+                    
+                  </div>
+                  <div class="card-footer">
+                  </div>
+              </div>
+              </div>
+              {% endfor %}
+           
+        </div>
+    </div>
+<!---------------------------------------------------------------------------------------------------------------------------------------->
+    
 </div>
-
-<p><a href="{% url 'listing' %}">New Listing</a></p>
-
-
 {% endblock %}
+

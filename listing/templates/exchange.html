@@ -23,7 +23,7 @@
 </div>
 
 <div id="form-content">
-    <form action="{% url 'company_search' %}" method="POST">
+    <form action="{% url 'filtered_company' %}" method="POST">
         {% csrf_token %}
       <div class="row">
         <div class="col-12 col-md-6">
@@ -34,29 +34,23 @@
       </div>
     </form>
 </div>
+</div>
 
-
-  
+<div class="row"> 
   {% for listing in listings %}
   <div class="col-md-4">
     <div class="card">
       <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
       <div class="card-body">
-        <a href=""><h3 class="card-title">{{ listing.title }}</h3></a>
+        <a href="{% url 'view_listing' listing.id %}"><h3 class="card-title">{{ listing.title }}</h3></a>
         <p class="card-text">{{ listing.content|truncatewords:20 }}</p>
       </div>
       <div class="card-footer">
-        
-    
       </div>
   </div>
   </div>
   {% endfor %}
 </div>
-
-
-
-
 {% endblock %}
 
 

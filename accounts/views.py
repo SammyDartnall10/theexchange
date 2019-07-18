@@ -11,7 +11,8 @@ from django.contrib.auth import get_user
 from accounts.forms import UserLoginForm, UserRegistrationForm, MakePaymentForm
 from django.conf import settings
 from listing.models import Listing
-from company.models import CompanyDetail
+from django.db.models import Avg, Count
+from company.models import CompanyDetail, CompanyReview
 from company.forms import CompanyDetailForm
 
 import datetime
@@ -128,9 +129,11 @@ def profile(request):
     listings = Listing.objects.filter(created_by = request.user)
     if CompanyDetail.objects.get(created_by = request.user):
         company = CompanyDetail.objects.get(created_by = request.user)
+        reviews = CompanyReview.objects.filter(company_reviewed = company)
+        avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
     else: 
         company = CompanyDetail.objects.get(created_by = 'admin2')
-    return render(request, 'profile.html', {"profile": user, "listings": listings, "company": company})                    
+    return render(request, 'profile.html', {"profile": user, "listings": listings, "company": company, 'reviews': reviews, 'avg_rating': avg_rating})                    
 
 
 

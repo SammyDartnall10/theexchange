@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-12">
-    <h1>Listings Page</h1>
+    <h1>Company Search Results</h1>
   </div>
   
 <div id="form-content">
@@ -14,8 +14,8 @@
         {% csrf_token %}
       <div class="row">
         <div class="col-12 col-md-6">
-          <label for="searchListings">Search for listings</label>
-            <input name="search-listings" type="text">
+          <label for="searchCompany">Search for a business</label>
+            <input name="search-company" type="text">
             <input type="submit" id='submit' class='btn btn-dark type-search' value="Search" />
         </div>
       </div>
@@ -23,18 +23,13 @@
 </div>
 
   
-  {% for listing in listings %}
-  <div class="col-md-4">
+  {% for company in companies %}
+  <div class="col-md-6">
     <div class="card">
-      <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
       <div class="card-body">
-        <a href="{% url 'view_listing' listing.id %}"><h3 class="card-title">{{ listing.title }}</h3></a>
-        
-        <p class="card-text">{{ listing.content|truncatewords:20 }}</p>
+        <a href="{% url 'company_search' company.business_name %}"><h3 class="card-title">{{ company.business_name }}</h3></a>
       </div>
       <div class="card-footer">
-        
-    
       </div>
   </div>
   </div>
@@ -45,6 +40,3 @@
 
 
 {% endblock %}
-
-
-

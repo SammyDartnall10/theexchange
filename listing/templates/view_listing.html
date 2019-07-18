@@ -17,22 +17,11 @@
                     <h4>Business email</h4>
                     <p>{{ listing.contact }}</p>
                 </div>
+                
                 <div class="col-xs-9">
-                    <h4>Listing Tags</h4>
-                    <p>{{ listing.tag }}</p>
-                </div>
-                <div class="col-xs-9">
-                    <h4>Your own "can offer" in return</h4>
+                    <h4>What we "can offer" in return</h4>
                     <p>{{ listing.can_offer }}</p>
                 </div>
-                
-                <div class="col-12">
-                    <a href="{% url 'profile' %}" class="btn btn-default">Back to Profile</a>
-                    <a href="{% url 'edit_listing' listing.id %}" class="btn btn-default">Edit Details</a>
-                    <hr>
-                </div>
-            
         </div>
     </div>
 {% endblock %}
-

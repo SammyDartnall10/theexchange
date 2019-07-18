@@ -51,13 +51,13 @@ def edit_listing(request, pk):
             form = NewListing(request.POST, request.FILES, instance=listing)
             if form.is_valid():
                 listing = form.save()
-                return redirect('detail.html')        
+                return redirect('profile')        
         else:
             form = NewListing(instance=listing)
     else: 
         return HttpResponseForbidden()
         
-    return render(request, 'createnew.html', {'form': form})
+    return render(request, 'edit_listing.html', {'form': form})
     #rendering the createnew file as its the same- wil display the info already saved and then save over with the edits. Linked in URLs
     
 def listing_detail(request, pk):
@@ -66,7 +66,16 @@ def listing_detail(request, pk):
     Or return a 404 error if the post is not found
     """
     listing = get_object_or_404(Listing, pk=pk)
-    return render(request, "listing_detail.html", {'listing': listing})   
+    return render(request, "listing_detail.html", {'listing': listing})  
+
+def view_listing(request, pk):
+    """
+    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
+    Or return a 404 error if the post is not found
+    """
+    listing = get_object_or_404(Listing, pk=pk)
+    return render(request, "view_listing.html", {'listing': listing})    
+    
 """
 def create_listing(request, pk=None):
     #Create a post - looks to see if theres an existing post

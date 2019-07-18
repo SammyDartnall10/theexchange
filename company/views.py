@@ -45,28 +45,39 @@ def company_detail(request, pk):
     """
     company = get_object_or_404(CompanyDetail, pk=pk)
     return render(request, "company_detail.html", {'company': company})
-    
-def company_search(request):
+
+def filtered_company(request):
     """
-    search for comanpy based on name
+    search based on text input - returns companies
     """
     if request.method =="POST":
         search_criteria = request.POST.get('search-company')
-        company = CompanyDetail.objects.get(business_name__contains=search_criteria)
-        company_form = CompanyReviewForm(request.POST, request.FILES)
-        reviews = CompanyReview.objects.filter(company_reviewed = company)
-        avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
-        print(avg_rating)
-        print(type(avg_rating))
-        
-        return render(request, "view_company.html", {'company': company, 'company_form': company_form, 'reviews': reviews, 'avg_rating': avg_rating})
-        
+        print(search_criteria)
+        companies = CompanyDetail.objects.filter(business_name__contains=search_criteria)
+        return render(request, "filtered_company.html", {'companies': companies})
     else:
-        return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")
-        
-        
+        return HttpResponse("Sorry, no results for that business - please try again")
+
+    
+def company_search(request, company_name):
+    """
+    search for comanpy based on name - display info that cant be editied (read only)
+    """
+    
+    company = CompanyDetail.objects.get(business_name__contains=company_name)
+    company_form = CompanyReviewForm(request.POST, request.FILES)
+    reviews = CompanyReview.objects.filter(company_reviewed = company)
+    avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
+    
+    print(company)
+    print(avg_rating)
+    print(type(avg_rating))
+    
+    return render(request, "view_company.html", {'company': company, 'company_form': company_form, 'reviews': reviews, 'avg_rating': avg_rating})
+    
  
 def add_company_review(request, company):
+    """return page with new review added """
     if request.method == 'POST':
         company_form = CompanyReviewForm(request.POST, request.FILES)
         if company_form.is_valid():
@@ -74,9 +85,14 @@ def add_company_review(request, company):
             review.company_reviewed=CompanyDetail.objects.get(business_name = company)
             review.created_by = request.user  # The logged-in user - re-fill in this field automatically
             review.save()
+            
             company = get_object_or_404(CompanyDetail, business_name = company)
+            company_form = CompanyReviewForm(request.POST, request.FILES)
+            reviews = CompanyReview.objects.filter(company_reviewed = company)
+            avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
+            
             messages.success(request, "You have successfully left a review!")
-            return render(request, "company_detail.html", {'company': company})
+            return render(request, "view_company.html", {'company': company, 'company_form': company_form, 'reviews': reviews, 'avg_rating': avg_rating})
     else:
         company_form = CompanyReviewForm()
         

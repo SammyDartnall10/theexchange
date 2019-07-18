@@ -18,7 +18,7 @@ Including another URLconf
     
     
 from django.urls import path, include
-from .views import create_listing, get_listings, edit_listing, listing_detail, filtered_listings
+from .views import create_listing, get_listings, edit_listing, listing_detail, filtered_listings, view_listing
 #new_listing
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path('<pk>/detail', listing_detail, name='listing_detail'),
     path('exchange', get_listings, name='exchange'),
     path('exchange/results', filtered_listings, name='filtered_results'),
+    path('<pk>/view_listing', view_listing, name='view_listing'),
     #path('new/', new_listing, name='new_listing'),
 ]
     

@@ -4,7 +4,7 @@ from .models import CompanyDetail, CompanyReview
 class CompanyDetailForm(forms.ModelForm):
     class Meta:
         model = CompanyDetail
-        exclude = ['created_by']
+        exclude = ['created_by', 'overall_rating']
         #fields = ('industry', 'contact_email', 'about_us', 'logo')
         # exclude user from here so it doesnt come through as a field to be filled in in the html
         
