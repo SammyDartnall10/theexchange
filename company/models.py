@@ -46,17 +46,3 @@ class CompanyReview(models.Model):
     rating = models.IntegerField(choices=RATINGS, blank=False)
     date_created = models.DateTimeField(blank=True, null=True, default=timezone.now)
     
-class ReviewCompany(models.Model):
-    RATINGS = (
-        (1,'1'),
-        (2,'2'),
-        (3,'3'),
-        (4,'4'),
-        (5,'5'),
-        )
-    
-    created_by = models.ForeignKey(User, null=True, default=1, on_delete=models.SET_DEFAULT)
-    company_reviewed = models.ForeignKey(CompanyDetail, null=True, default="Default Business Name", on_delete=models.SET_DEFAULT)
-    content = models.TextField(max_length=254, null=True, default="Review Content", blank=False)
-    rating = models.IntegerField(choices=RATINGS, blank=False)
-    date_created = models.DateTimeField(blank=True, null=True, default=timezone.now)
