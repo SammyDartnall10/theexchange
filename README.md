@@ -2,19 +2,19 @@
 
 <p>Want to swap some stuff? Look no further 👉 >> (link for deployed app)
 
-The inspiration for this project came from my own conversations with freelancers, and small business owners trying to get thier dream off the proverbial ground. 
+The inspiration for this project came from my own conversations with freelancers, and small business owners trying to get their dream off the proverbial ground. 
 
-One common theme would emerge from these conversations is that - as solo entreprenures, freelancers and side hustlers, money for setup and launch is fairly small. However, the range of things you can spend this small amount of money on is seemingly endless. No longer do you need a website, you also need SEO, an instagram and facebook presence, constant interaction with your hard earned followers. And its not enough to take basic photos of your product - you need a photoshoot, prefessionally staged, and then someone to edit these photos before they go online. Caterers to feed the attendees at launch parties, staff to help you man the tent when selling at markets or festivals. 
+One common theme would emerge from these conversations is that - as solo entrepreneurs, freelancers and side hustlers, money for setup and launch is fairly small. However, the range of things you can spend this small amount of money on is seemingly endless. No longer do you need a website, you also need SEO, an Instagram and Facebook presence, constant interaction with your hard-earned followers. And it’s not enough to take basic photos of your product - you need a photoshoot, professionally staged, and then someone to edit these photos before they go online. Caterers to feed the attendees at launch parties, staff to help you man the tent when selling at markets or festivals. 
 Suddenly - the cost of launching your passion with the impact it deserves is looking more and more unattainable. 
 If only we had the budget of large corporates - right? 
 
 Wrong.
 
-What we, small business owners, contractors and entreprenurs have, is range of products and services we "can offer". 
+What we, small business owners, contractors and entrepreneurs have, is range of products and services we "can offer". 
 
-Our businesses may be in photography, catering, flower arrangement, recruitment, web develpment. And the multiskilled people we are - our skill sets will often branch out beyond that of out core business. The photographer who can retouch photos in a second in photoshop, the chef who is also a business management coach. 
+Our businesses may be in photography, catering, flower arrangement, recruitment, web development. And the multiskilled people we are - our skill sets will often branch out beyond that of our core business. The photographer who can retouch photos in a second in lightroom, the chef who is also a sound business management coach. 
 
-What if we could swap our products and services, in return for those we need? If you've been to a networking evening you'll be familiar with the format - Whats are you after, what is your "ask"? And whan can you "offer" in return?
+What if we could swap our products and services, in return for those we need? If you've been to a networking evening, you'll be familiar with the format - What’s are you after, what is your "ask"? And what can you "offer" in return?
 
 That is the basis for this app- a place where people can post for the things they need, and what they can swap for it in return. 
 
@@ -74,23 +74,36 @@ That is the basis for this app- a place where people can post for the things the
 <h2>Existing Features</h2>
 
 <p>All the CRUD (Create, Read, Update and Delete) operations have been fully deployed in the app. </p>
+- Anyone can search the main exchange page for listings
+    Anyone can search the main business exchange - allowing people that arent yet users to see what listings are available, and incentove signups. Contact details wont be shown - only high level detail (the card) will be seen. Pop up saying - want to get in touch? Sign up here - and redirects to signup page
+- Authentication - logging in and logging out to maintain profile and add/edit listings
+- E-commerce - one off payment to access the site when registering 
+- Forgot Password feature
+- When a new user registers, an entry in a Company table is generated.
+    Editing company detail has been left until the user has logged in, to reduce the overhead in the sign up form. 
 
-<p>The backend code and an easy to use frontend form have been created in "Add a new Alt_Work location" to allow users to add new records to the site.</p>
+- Users can upload info and edit info on thier own business/Company
+- Each User can add thier own listings, also edit listings. 
+    Achive option for listings that have been fufilled. 
+ 
 
-<p>Backend code groups and summarises the location on the site, based on region and type. This is displayed in a frontend page- the categories are then clickable to drill down into a filtered view based on region and type. 
-Backend code will retrieve a list of recipes, filtered based on region and type, and orders them based on rating. A frontend page displays these results, and to shows summary statistics in the form of amount of matching results. </p>
+- If logged in, users can see the contact details for Listings and respond to them
+- If logged in, users can upvote/like a listing to say “I also want this” - gives the listing a higher placed spot
 
-<p>A detailed view for each of the locations has been made. Editing and deleting of the location records is carried out on a separate page. Confirmation of deletion is implemented to prevent accidental deletion. </p>
+- Logged in users can leave reviews on other users and give a rating. Overall rating for users displayed on each Companies page.
+- Having a high overall rating will rank the users listings higher in the exchange
+
+- Javascript used in pop-up forms/modals for adding reviews (also maybe adding new listings?)
+
+- Bootstrap to ensure usability across devices
 
 <h2>Features Left to Implement (optional)</h2>
 
-<p>Authentication is yet to be implemented. Authentication will mean that reviews can be attributed to users, and also provide the basis for allowing location owners to 'claim' a location as theirs. 
-A further development will be a page accessible only when logged in, where a location owner can maintain the business information held on a location. 
-There would need to be some kind of verification process that the location owner is a genuine owner, otherwise there is the possibility that a user can falsely claim a location as their own, and incorrectly maintain or represent that location to the true owners detriment. In the absence of the resources to carry this out for each location, the editing of location details has been left open to the community, until a later date where verification is possible. </p>
+- Sending 'karma' to other user as either a thanks, or top make up the difference in a swap. Users can also be given karma in return for products and services - this karma can be used at a later date to make up the difference in exchanges. 
 
-<p>The storage and management of pictures has also been left as a later implementation. An online hosting service could be used, however users may not be happy with their images being stored on an easy to access site such as flickr. The option then of a database is possible, but a Node.js or other package would be required for this to work with MongoDB (MongoDB is not intended for image storage). As the focus of this brief has been around CRUD operations and data manipulation this has been left for a later release. </p>
-
-<p>At the time of first release the rating is a single number defined in the new location/edit location form, to reflect the latest users experience. This would be improved to be an average rating of reviews, a behaviour more in line with other review sites.
+- In-app messaging - at the moment contact is done through providing an email for people to contact. 
+- Means for sending propoals - similar to other freelancer sites 
+- 
 
 
 <h1>Technologies Used</h1>
