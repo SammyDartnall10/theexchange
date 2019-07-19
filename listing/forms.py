@@ -28,7 +28,7 @@ class NewListingArchive(forms.ModelForm):
 class NewListing(forms.ModelForm):
     class Meta:
         model = Listing
-        exclude = ['created_by', 'archive']
+        exclude = ['created_by']
         # exclude user from here so it doesnt come through as a field to be filled in in the html
         
 

@@ -15,6 +15,7 @@ def filtered_listings(request):
         search_criteria = request.POST.get('search-listings')
         print(search_criteria)
         listings = Listing.objects.filter(tag__contains=search_criteria)
+        print(listings)
         return render(request, "filtered_results.html", {'listings': listings})
     else:
         return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")

@@ -24,7 +24,7 @@ class Listing(models.Model):
     tag = models.TextField()
     can_offer = models.TextField(default="Please detail the things you can offer in return as single words, eg catering, photography")
     created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
-    archive = models.BooleanField()
+    #archive = models.BooleanField() figure this out later...
     #user added in here to create a location to store the values with everything in the database
 
     def __unicode__(self):
