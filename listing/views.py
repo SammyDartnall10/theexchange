@@ -1,9 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseForbidden, HttpResponse
-from .forms import NewListing, NewListingArchive
+from .forms import NewListing, NewListingArchive, UploadUpvotes
 from django.contrib.auth.models import User
-from .models import Listing
+from .models import Listing, Upvotes
 
 # Create your views here.
     
@@ -76,6 +76,23 @@ def view_listing(request, pk):
     """
     listing = get_object_or_404(Listing, pk=pk)
     return render(request, "view_listing.html", {'listing': listing})    
+    
+def testcall(request, pk):
+    """Take the pk from the ajax call and use to find listing id. Add a new upvote entry in the upvote table with the current user as the upviter to record who voted for what"""
+    listing = get_object_or_404(Listing, pk=pk)
+    voter = request.user
+    if request.method == "POST":
+            form = UploadUpvotes(request.POST, request.FILES)
+            if form.is_valid():
+                upvote = form.save(commit=False)
+                upvote.voter = voter  
+                upvote.listing_upvoted = listing
+                listing.save()
+                return redirect('/')
+            else:
+                return HttpResponse("Well, we got past the is request.method == POST bit.. but that form didnt work.. ")
+    else: 
+        return HttpResponse("the request method wasnt POST ")
     
 """
 def create_listing(request, pk=None):

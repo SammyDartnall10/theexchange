@@ -18,7 +18,7 @@ Including another URLconf
     
     
 from django.urls import path, include
-from .views import create_listing, get_listings, edit_listing, listing_detail, filtered_listings, view_listing
+from .views import create_listing, get_listings, edit_listing, listing_detail, filtered_listings, view_listing, testcall
 #new_listing
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path('exchange', get_listings, name='exchange'),
     path('exchange/results', filtered_listings, name='filtered_results'),
     path('<pk>/view_listing', view_listing, name='view_listing'),
+    path('<pk>/my-ajax-test/', testcall, name='testcall'),
     #path('new/', new_listing, name='new_listing'),
 ]
     

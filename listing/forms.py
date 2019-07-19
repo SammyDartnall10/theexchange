@@ -1,20 +1,11 @@
 from django import forms
-from .models import Listing, ListingArchive
+from .models import Listing, ListingArchive, Upvotes
 
 
-"""
-comment out while fixing forms...
-
-class NewListing(forms.Form):
-   
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'name'}))
-    description = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'description'}))
-    image = forms.ImageField()
-    
+class UploadUpvotes(forms.ModelForm):
     class Meta:
-        model = Listing
-        fields = ['name', 'description', 'image']
-"""
+        model = Upvotes
+        fields = ['voter', 'listing_upvoted']
 
 class ImageUploadForm(forms.Form):
     """Image upload form."""
@@ -32,3 +23,16 @@ class NewListing(forms.ModelForm):
         # exclude user from here so it doesnt come through as a field to be filled in in the html
         
 
+"""
+comment out while fixing forms...
+
+class NewListing(forms.Form):
+   
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'name'}))
+    description = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'description'}))
+    image = forms.ImageField()
+    
+    class Meta:
+        model = Listing
+        fields = ['name', 'description', 'image']
+"""

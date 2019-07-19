@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from company.models import CompanyDetail
 
 # Create your models here.
 class ListingArchive(models.Model):
@@ -30,7 +31,9 @@ class Listing(models.Model):
     def __unicode__(self):
         return self.title;
 
-
+class Upvotes(models.Model):
+    voter = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
+    listing_upvoted = models.ForeignKey(Listing, null=True, default="Default Business Name", on_delete=models.SET_DEFAULT)
 
 #TODO add in email validator
 
