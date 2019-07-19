@@ -26,7 +26,7 @@ from listing import urls as urls_listing
 from company import urls as urls_company
 from django.views.static import serve
 from django.conf import settings
-from .settings import MEDIA_ROOT
+from .settings import MEDIAFILES_LOCATION
 
 
 urlpatterns = [
@@ -37,7 +37,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('listing/', include('listing.urls')),
     path('company/', include('company.urls')),
-    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT }),
+    path('media/<path:path>', serve, {'document_root': settings.MEDIAFILES_LOCATION }),
 ]
 
 #then pull through the views and use the urls to call the functions - that then renders the template

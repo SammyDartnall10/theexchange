@@ -28,8 +28,8 @@ class CompanyDetail(models.Model):
     about_us = models.TextField(null=True, default="Information about your company - where you're from, what you do!", blank=True)
     address = models.TextField(null=True, default="Business Address", blank=True)
     logo = models.ImageField(upload_to='images', null=True, blank=True)
-    created_by = models.ForeignKey(User, null=True, default=1, on_delete=models.SET_DEFAULT)
-    overall_rating = models.IntegerField(default=0, blank=True)
+    created_by = models.ForeignKey(User, null=True, default="1", on_delete=models.SET_DEFAULT)
+    
     
 class CompanyReview(models.Model):
     RATINGS = (

@@ -127,6 +127,7 @@ def profile(request):
     """The user's profile page"""
     user = User.objects.get(email=request.user.email)
     listings = Listing.objects.filter(created_by = request.user)
+    
     if CompanyDetail.objects.get(created_by = request.user):
         company = CompanyDetail.objects.get(created_by = request.user)
         reviews = CompanyReview.objects.filter(company_reviewed = company)
