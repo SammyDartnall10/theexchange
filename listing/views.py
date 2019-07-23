@@ -4,6 +4,7 @@ from django.http import HttpResponseForbidden, HttpResponse
 from .forms import NewListing, NewListingArchive, UploadUpvotes
 from django.contrib.auth.models import User
 from .models import Listing, Upvotes
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
     
@@ -26,10 +27,28 @@ def get_listings(request):
     """
     pulls in all lisitings in one query set
     """
+    #
+    #1. Retrieve list of upvotes for logged in user
+    #2. Instead of using a list of objects, change it to just be a list of the listing names within the list of upvotes - #`upvoting_listing_names = [upvote.listing_updated.title for upvote in upvotes]`
+    #3. Return the list of upvotes with the listings - `{'listings': listings, 'upvoting_listing_names': upvoting_listing_names}`
+    #4. In the template, when iterating over the listings, put an if statement around the heart icon and if `listing.title` is in the #list ofupvotes, make the heart orange - `{% if listing.title in upvoting_listing_names %} display orange heart {% else %} #display black heart {% endif %}`
+    #swap titile for pk 
+#---------------------------------------------
+    #longhabd version - use listi comprehesions - 
+    user = request.user
+    upvoted = Upvotes.objects.filter(voter = user).values_list('listing_upvoted', flat=True)
+   
+    
+    print(upvoted)
+    print(type(upvoted))
+    print("hello")
+
+    #for upvote in upvotes:
+    #    upvoting_listing_names.append(upvote.listing_upvoted.title)
     listings = Listing.objects.all()
-    return render(request, "exchange.html", {'listings': listings})
     
-    
+    return render(request, "exchange.html", {'listings': listings, 'upvoted': upvoted})
+
     
 def create_listing(request):
     if request.method == 'POST':
@@ -77,22 +96,33 @@ def view_listing(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
     return render(request, "view_listing.html", {'listing': listing})    
     
-def testcall(request, pk):
+@csrf_exempt
+def upvote(request):
     """Take the pk from the ajax call and use to find listing id. Add a new upvote entry in the upvote table with the current user as the upviter to record who voted for what"""
+    print("got to the upvote view")
+    pk = request.POST['pk']
     listing = get_object_or_404(Listing, pk=pk)
     voter = request.user
-    if request.method == "POST":
-            form = UploadUpvotes(request.POST, request.FILES)
-            if form.is_valid():
-                upvote = form.save(commit=False)
-                upvote.voter = voter  
-                upvote.listing_upvoted = listing
-                listing.save()
-                return redirect('/')
-            else:
-                return HttpResponse("Well, we got past the is request.method == POST bit.. but that form didnt work.. ")
-    else: 
-        return HttpResponse("the request method wasnt POST ")
+
+    upvote_instance = Upvotes.objects.create(voter=voter, listing_upvoted=listing)
+    
+    return redirect(request, 'exchange.html')
+    
+    #TODO - create new record in upvote table 
+    #return JSON respone that says 200 successssful - can feed back to user 
+
+@csrf_exempt
+def downvote(request):
+    """Take the pk from the ajax call and use to find listing id. Add a new upvote entry in the upvote table with the current user as the upviter to record who voted for what"""
+    
+    pk = request.POST['pk']
+    listing = get_object_or_404(Listing, pk=pk)
+    voter = request.user
+    
+    downvote_instance = Upvotes.objects.delete(voter=voter, listing_upvoted=listing)
+    
+    
+    return render(request, 'exchange.html')
     
 """
 def create_listing(request, pk=None):

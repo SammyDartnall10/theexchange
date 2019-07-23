@@ -31,8 +31,8 @@ isort==4.3.20
 jedi==0.11.1
 Jinja2==2.10
 jmespath==0.9.4
-jsonpatch==1.16
-jsonpointer==1.10
+jsonpatch==1.23
+jsonpointer==2.0
 jsonschema==2.6.0
 keyring==10.6.0
 keyrings.alt==3.0

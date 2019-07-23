@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.db.models import Avg
 
 # Create your models here.
         
@@ -29,6 +30,13 @@ class CompanyDetail(models.Model):
     address = models.TextField(null=True, default="Business Address", blank=True)
     logo = models.ImageField(upload_to='images', null=True, blank=True)
     created_by = models.ForeignKey(User, null=True, default="1", on_delete=models.SET_DEFAULT)
+    @property
+    def average_review(self):
+        reviews = self.companyreview_set.all()
+        avg_rating = reviews.aggregate(Avg('rating'))
+        return avg_rating
+    
+    #avg_rating = models.IntegerField(CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating')))
     
     
 class CompanyReview(models.Model):

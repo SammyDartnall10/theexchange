@@ -38,18 +38,26 @@
 
 <div class="row"> 
   {% for listing in listings %}
-  <div class="col-md-4">
-    <div class="card h-100">
+  
+  
+  <div class="col-md-4 ">
+    <div class="card h-100 ">
       <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
       <div class="card-body">
         <a href="{% url 'view_listing' listing.id %}"><h3 class="card-title">{{ listing.title }}</h3></a>
         <p class="card-text">{{ listing.content|truncatewords:20 }}</p>
       </div>
       <div class="card-footer">
-        <span id="{{ listing.id }}" onclick="upvote(this)"><i class="fas fa-heart upvote"></i></span><span class="float-right"><p>Upvotes: {{ count }}</p> </span>
+        {% if listing.id in upvoted %}
+        <span id="{{ listing.id }}" onclick="upvote(this)"><i class="fas fa-heart upvote" style="color:red" ></i></span><span class="float-right"><p>Upvotes: {{ listing.upvotes }}</p> </span>
+        {% else %}
+        <span id="{{ listing.id }}" onclick="upvote(this)"><i class="fas fa-heart downvote" style="color:black" ></i></span><span class="float-right"><p>Upvotes: {{ listing.upvotes }}</p> </span>
+        {% endif %}
       </div>
   </div>
   </div>
+  
+  
   {% endfor %}
 </div>
 {% endblock %}

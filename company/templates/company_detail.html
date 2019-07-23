@@ -24,7 +24,12 @@
         </div>
         
         <div class="col-md-6">
-            <h5>Overall Rating:</h5> <p>{{ company.overall_rating }}</p>
+            <h5>Overall Rating:</h5> <p>{{ company.average_review }}</p>
+            <h5>Overall Rating:</h5> 
+            
+            {% for key, value in company.average_review.items %}
+            <p>{{ value }}</p>
+            {% endfor %}
         </div>
         
         <div>

@@ -54,9 +54,12 @@ def filtered_company(request):
         search_criteria = request.POST.get('search-company')
         print(search_criteria)
         companies = CompanyDetail.objects.filter(business_name__contains=search_criteria)
+        print(type(companies))
         return render(request, "filtered_company.html", {'companies': companies})
     else:
         return HttpResponse("Sorry, no results for that business - please try again")
+        
+        #TODO add display on average rating in list.. 
 
     
 def company_search(request, company_name):
@@ -67,13 +70,13 @@ def company_search(request, company_name):
     company = CompanyDetail.objects.get(business_name__contains=company_name)
     company_form = CompanyReviewForm(request.POST, request.FILES)
     reviews = CompanyReview.objects.filter(company_reviewed = company)
-    avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
+    #avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
     
     print(company)
-    print(avg_rating)
-    print(type(avg_rating))
+    #print(avg_rating)
+    #print(type(avg_rating))
     
-    return render(request, "view_company.html", {'company': company, 'company_form': company_form, 'reviews': reviews, 'avg_rating': avg_rating})
+    return render(request, "view_company.html", {'company': company, 'company_form': company_form, 'reviews': reviews})
     
  
 def add_company_review(request, company):

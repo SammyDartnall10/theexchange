@@ -1,13 +1,44 @@
 
+
+
 function upvote(e){
     var pk = $(e).attr('id');
     
         console.log("Hello World");
-        document.getElementById(pk).style = "Color: red";
+        if (document.getElementById(pk).style = "Color: black") {
+            console.log("turn it red");
+            $.ajax({
+                type: "POST",
+                url: "upvote/",
+                data: { pk: pk },
+                success: function callback(response){
+                   console.log(response);
+                        }
+            })
+        } else {
+            console.log("turn it black");
+            $.ajax({
+                type: "POST",
+                url: "downvote/",
+                data: { pk: pk },
+                success: function callback(response){
+                   console.log(response);
+                        }
+            })
+        }
+    }
+    
+    
+    
+function downvote(e){
+    var pk = $(e).attr('id');
+    
+        console.log("Hello World");
+        document.getElementById(pk).style = "Color: black";
         $.ajax({
             type: "POST",
-            url: "my-ajax-test/",
-            data: { csrfmiddlewaretoken: '{{ csrf_token }}', pk: pk },
+            url: "downvote/",
+            data: { pk: pk },
             success: function callback(response){
                console.log(response);
                     }

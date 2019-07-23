@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from company.models import CompanyDetail
+from django.db.models import Count
 
 # Create your models here.
 class ListingArchive(models.Model):
@@ -25,8 +26,16 @@ class Listing(models.Model):
     tag = models.TextField()
     can_offer = models.TextField(default="Please detail the things you can offer in return as single words, eg catering, photography")
     created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
+    @property
+    def upvotes(self):
+        count_upvotes = self.upvotes_set.all()
+        total_count = count_upvotes.count()
+        return total_count
     #archive = models.BooleanField() figure this out later...
     #user added in here to create a location to store the values with everything in the database
+
+
+ 
 
     def __unicode__(self):
         return self.title;
