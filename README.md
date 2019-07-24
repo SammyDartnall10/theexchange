@@ -2,24 +2,29 @@
 
 <p>Want to swap some stuff? Look no further 👉 >> (link for deployed app)
 
-The inspiration for this project came from my own conversations with freelancers, and small business owners trying to get their dream off the proverbial ground. 
-
-One common theme would emerge from these conversations is that - as solo entrepreneurs, freelancers and side hustlers, money for setup and launch is fairly small. However, the range of things you can spend this small amount of money on is seemingly endless. No longer do you need a website, you also need SEO, an Instagram and Facebook presence, constant interaction with your hard-earned followers. And it’s not enough to take basic photos of your product - you need a photoshoot, professionally staged, and then someone to edit these photos before they go online. Caterers to feed the attendees at launch parties, staff to help you man the tent when selling at markets or festivals. 
+<p>The inspiration for this project came from my own conversations with freelancers, and small business owners trying to get their dream off the proverbial ground. 
+</p>
+<p>
+One common theme would emerge from these conversations - as solo entrepreneurs, freelancers and side hustlers, money for setup and launch is fairly small. However, the range of things you can spend this small amount of money on is seemingly endless. No longer do you need a website, you also need SEO, an Instagram and Facebook presence, and constant 'real' interaction with your hard-earned followers. It’s not enough to take basic photos of your product - you need a photoshoot, professionally staged, and then someone to edit these photos before they go online. Caterers to feed the attendees at launch parties, staff to help you man the tent when selling at markets or festivals. 
 Suddenly - the cost of launching your passion with the impact it deserves is looking more and more unattainable. 
 If only we had the budget of large corporates - right? 
-
+</p>
+<p>
 Wrong.
-
+</p>
+<p>
 What we, small business owners, contractors and entrepreneurs have, is range of products and services we "can offer". 
-
+</p>
+<p>
 Our businesses may be in photography, catering, flower arrangement, recruitment, web development. And the multiskilled people we are - our skill sets will often branch out beyond that of our core business. The photographer who can retouch photos in a second in lightroom, the chef who is also a sound business management coach. 
-
-What if we could swap our products and services, in return for those we need? If you've been to a networking evening, you'll be familiar with the format - What’s are you after, what is your "ask"? And what can you "offer" in return?
-
+</p>
+<p>
+What if we could swap our products and services, in return for those we need? If you've been to a networking evening, you'll be familiar with the format - What are you looking for, what is your "ask"? And what can you "offer" in return?
+</p>
+<p>
 That is the basis for this app- a place where people can post for the things they need, and what they can swap for it in return. 
-
-
-
+</p>
+ 
 
 <h1>UX</h1>
 
@@ -29,33 +34,9 @@ That is the basis for this app- a place where people can post for the things the
 
 <p>The functional specifications driven by these use cases are as follows:<p>
 
-- Search for locations by category
 
-- Search for locations by location
 
-- Search for locations by best_for
-
-- Display information of each location :
-	* Address
-	* Category
-	* Amenities (wifi etc)
-    * Reviews from other users
-
-- Users can upload a new location record
-
-- Location owners can identify themselves as the owner of that location, and maintain business record information:
-    * Business Name
-    * Address
-    * Email/Contact details
-    * Profile/Display photo
-    * Offers and sales available for users (BYGOF etc)
-    
-
-- Users can edit exising location records by way of adding a review
-
-- If information on a location is incorrect users can edit and update
-
-- To make changes or upload new records users must login - this will provide a means of tracking changes. 
+-  
 
 
 <h3>Wireframes and Functional flows:</h3>
@@ -71,14 +52,40 @@ That is the basis for this app- a place where people can post for the things the
 <p>Features deployed, and to be deployed are summarised in the following table</p>
 <img src="readme_static/Deployment.png">
 
-<h2>Existing Features</h2>
+<h2>High level project purpose</h2>
+
+<p>This project is a full-stack site based around business logic used to control a centrally-owned dataset - namely - products and services that people are looking for, and able to offer. Authentication mechanisms and paid access to the site's data and other activities are based on this dataset, allowing only registered users to post listings, and find what others are looking for in return.</p> 
+
+<h2>Key Value Add</h2>
+
+<p>By authenticating on the site and paying for some of its services, users can use the site to find other businesses with whom they may swap goods and services, to the benefit and growth of both parties. Before authenticating, the user can find out how this works in the 'about' page.</p>
+
+<p>As access to the exchange, contact users and create listings is dependent on authentication, there is no way for a regular user to bypass the site's mechanisms and derive all of the value available to paid users without paying.</p>
+<p>In this way, the site owner is able to make money by providing this access as a set of services to the users. </p>
+
+<h2>Existing Features and Mandatory requirements</h2>
+
+
 
 <p>All the CRUD (Create, Read, Update and Delete) operations have been fully deployed in the app. </p>
-- Anyone can search the main exchange page for listings
-    Anyone can search the main business exchange - allowing people that arent yet users to see what listings are available, and incentove signups. Contact details wont be shown - only high level detail (the card) will be seen. Pop up saying - want to get in touch? Sign up here - and redirects to signup page
-- Authentication - logging in and logging out to maintain profile and add/edit listings
-- E-commerce - one off payment to access the site when registering 
-- Forgot Password feature
+
+<h4>Relational Database:<h4><p> A postgres database provisioned through Heroku has been used. Users are able to login in and create, edit and delete data records pertaining to their own accounts - ie they can create and manipulate listings made for their company. </p>
+
+<h4>Multiple Apps:<h4><p> Each distinct feature has been split into its own app as follows. This way each element of the website becomes reusable</p>
+- about : information about the site itself
+- accounts : registration and payments have been combined here, as registration and payment(subscription) occurs at the same time. Contains models for personal information, username, email etc.
+- busex : top level settings.py and urls.py
+- company : company specific information, which is separte to the user registered. For example, registered business address, business contact email.
+- landing : index.html - provides options for redirection to registering, login or to find out more about the app(about page)
+- listing : models views and forms etc for creating, editing and viewing listings, both individually and as a group. 
+
+<h4>Design:<h4><p></p>
+- Authentication has been reused from an earlier CI project - logging in and logging out to maintain profile and add/edit listings
+    - Forgot Password feature has also been implemented in the event a user forgets login details
+    
+
+- E-commerce - a one off Stripe payment has been integrated into the registration form.  
+
 - When a new user registers, an entry in a Company table is generated.
     Editing company detail has been left until the user has logged in, to reduce the overhead in the sign up form. 
 
@@ -108,7 +115,7 @@ That is the basis for this app- a place where people can post for the things the
 
 <h1>Technologies Used</h1>
 
-As a Flask application app logic has be written in Python 3. 
+As a Django application app logic has be written primarily in Python 3 within the Django framework. 
 
 HTML, CSS, and JavaScript have be used to enhance the look and feel in the following ways.
 
@@ -116,7 +123,9 @@ Rendering of pages was achieved using a combination of HTML5 and CSS. The Bootst
 
 Javascript, and the JQuery  and ajax frameworks have been used to capture on-click events and modal popups, to enhance user experience and guide usage (prevent accidental deletion of records)
 
-The Alt_Work app is data-driven and relies on a mix of structured and unstructured data. CRUD operations are carried out using NoSQL databse - specifically MongoDB.
+The Alt_Work app is data-driven and relies on a mix of structured and unstructured data. CRUD operations are carried out using a postgres database, provisioned through Heroku. 
+
+Stripe payments are collected upon registering, setup up and managed using the Stripe API. Using the Stripe API in this way ensure the app is compliant with financial and data collection regulations. 
 
 <h1>Testing</h1>
 

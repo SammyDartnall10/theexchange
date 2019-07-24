@@ -5,6 +5,7 @@ from .forms import NewListing, NewListingArchive, UploadUpvotes
 from django.contrib.auth.models import User
 from .models import Listing, Upvotes
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
     
@@ -22,7 +23,7 @@ def filtered_listings(request):
         return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")
         
 
-    
+@login_required    
 def get_listings(request):
     """
     pulls in all lisitings in one query set
@@ -32,6 +33,7 @@ def get_listings(request):
     upvoted = Upvotes.objects.filter(voter = user).values_list('listing_upvoted', flat=True) #list to check to see if listing has been liked by user
    
     listings = Listing.objects.all()
+    print (listings)
           
     return render(request, "exchange.html", {'listings': listings, 'upvoted': upvoted})
 

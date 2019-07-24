@@ -15,6 +15,16 @@ body {
     padding-top: 65px; 
 }
 
+.panel{
+    background-color: #e6ffff;
+      padding: 30px; 
+}
+
+.listingspanel{
+    border-bottom-color: black;
+    border-bottom-width: 1px;
+}
+
 .button {
     -webkit-appearance: button;
     -moz-appearance: button;

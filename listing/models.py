@@ -26,6 +26,7 @@ class Listing(models.Model):
     tag = models.TextField()
     can_offer = models.TextField(default="Please detail the things you can offer in return as single words, eg catering, photography")
     created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
+    #total_upvotes = models.IntegerField(default=self.upvotes, blank=False)
     @property
     def upvotes(self):
         count_upvotes = self.upvotes_set.all()
