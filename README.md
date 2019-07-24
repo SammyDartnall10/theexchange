@@ -69,9 +69,11 @@ That is the basis for this app- a place where people can post for the things the
 
 <p>All the CRUD (Create, Read, Update and Delete) operations have been fully deployed in the app. </p>
 
-<h4>Relational Database:<h4><p> A postgres database provisioned through Heroku has been used. Users are able to login in and create, edit and delete data records pertaining to their own accounts - ie they can create and manipulate listings made for their company. </p>
+<h4>Relational Database:<h4>
+<p> A postgres database provisioned through Heroku has been used. Users are able to login in and create, edit and delete data records pertaining to their own accounts - ie they can create and manipulate listings made for their company. </p>
 
-<h4>Multiple Apps:<h4><p> Each distinct feature has been split into its own app as follows. This way each element of the website becomes reusable</p>
+<h4>Multiple Apps:<h4>
+<p> Each distinct feature has been split into its own app as follows. This way each element of the website becomes reusable</p>
 - about : information about the site itself
 - accounts : registration and payments have been combined here, as registration and payment(subscription) occurs at the same time. Contains models for personal information, username, email etc.
 - busex : top level settings.py and urls.py
