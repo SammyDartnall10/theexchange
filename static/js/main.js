@@ -3,48 +3,47 @@
 
 function upvote(e){
     var pk = $(e).attr('id');
-    
-        console.log("Hello World");
-        if (document.getElementById(pk).style = "Color: black") {
+        
+        var colour = document.getElementById(pk).style.cssText;
+        console.log(colour);
+        
+        if ( colour = "black") {
             console.log("turn it red");
+            console.log(document.getElementById(pk));
+            document.getElementById(pk).style = "color: red";
             $.ajax({
                 type: "POST",
-                url: "upvote/",
+                url: "upvote",
                 data: { pk: pk },
-                success: function callback(response){
+                success: function(response){
                    console.log(response);
-                        }
-            })
-        } else {
-            console.log("turn it black");
+                   document.location.href = 'exchange';
+                   document.getElementById(pk).scrollIntoView();
+                            }
+                });
+                    
+        } 
+        else 
+        {
+                
+            console.log("it must be red, so turn it black");
+            console.log(document.getElementById(pk));
+            document.getElementById(pk).style = "color: black";
             $.ajax({
                 type: "POST",
-                url: "downvote/",
+                url: "downvote",
                 data: { pk: pk },
-                success: function callback(response){
+                success: function (response){
                    console.log(response);
+                   document.location.href = 'exchange';
+                   document.getElementById(pk).scrollIntoView();
                         }
-            })
+            });
         }
     }
     
     
-    
-function downvote(e){
-    var pk = $(e).attr('id');
-    
-        console.log("Hello World");
-        document.getElementById(pk).style = "Color: black";
-        $.ajax({
-            type: "POST",
-            url: "downvote/",
-            data: { pk: pk },
-            success: function callback(response){
-               console.log(response);
-                    }
-        })
-        
-    }
+
 
 /*
 ----------------------------------------------------------------------------

@@ -27,26 +27,12 @@ def get_listings(request):
     """
     pulls in all lisitings in one query set
     """
-    #
-    #1. Retrieve list of upvotes for logged in user
-    #2. Instead of using a list of objects, change it to just be a list of the listing names within the list of upvotes - #`upvoting_listing_names = [upvote.listing_updated.title for upvote in upvotes]`
-    #3. Return the list of upvotes with the listings - `{'listings': listings, 'upvoting_listing_names': upvoting_listing_names}`
-    #4. In the template, when iterating over the listings, put an if statement around the heart icon and if `listing.title` is in the #list ofupvotes, make the heart orange - `{% if listing.title in upvoting_listing_names %} display orange heart {% else %} #display black heart {% endif %}`
-    #swap titile for pk 
-#---------------------------------------------
-    #longhabd version - use listi comprehesions - 
-    user = request.user
-    upvoted = Upvotes.objects.filter(voter = user).values_list('listing_upvoted', flat=True)
    
-    
-    print(upvoted)
-    print(type(upvoted))
-    print("hello")
-
-    #for upvote in upvotes:
-    #    upvoting_listing_names.append(upvote.listing_upvoted.title)
+    user = request.user
+    upvoted = Upvotes.objects.filter(voter = user).values_list('listing_upvoted', flat=True) #list to check to see if listing has been liked by user
+   
     listings = Listing.objects.all()
-    
+          
     return render(request, "exchange.html", {'listings': listings, 'upvoted': upvoted})
 
     
@@ -99,28 +85,23 @@ def view_listing(request, pk):
 @csrf_exempt
 def upvote(request):
     """Take the pk from the ajax call and use to find listing id. Add a new upvote entry in the upvote table with the current user as the upviter to record who voted for what"""
-    print("got to the upvote view")
+    print("got as far as  the upvote view")
     pk = request.POST['pk']
     listing = get_object_or_404(Listing, pk=pk)
     voter = request.user
-
     upvote_instance = Upvotes.objects.create(voter=voter, listing_upvoted=listing)
     
-    return redirect(request, 'exchange.html')
-    
-    #TODO - create new record in upvote table 
-    #return JSON respone that says 200 successssful - can feed back to user 
+    return render(request, 'exchange.html')
+     
 
 @csrf_exempt
 def downvote(request):
-    """Take the pk from the ajax call and use to find listing id. Add a new upvote entry in the upvote table with the current user as the upviter to record who voted for what"""
+    """Take the pk from the ajax call and use to find listing id. Delete that record"""
     
     pk = request.POST['pk']
     listing = get_object_or_404(Listing, pk=pk)
     voter = request.user
-    
-    downvote_instance = Upvotes.objects.delete(voter=voter, listing_upvoted=listing)
-    
+    downvote_instance = Upvotes.objects.filter(voter=voter, listing_upvoted=listing).delete()
     
     return render(request, 'exchange.html')
     

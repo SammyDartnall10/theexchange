@@ -28,8 +28,8 @@ urlpatterns = [
     path('exchange', get_listings, name='exchange'),
     path('exchange/results', filtered_listings, name='filtered_results'),
     path('<pk>/view_listing', view_listing, name='view_listing'),
-    path('upvote/', upvote, name='upvote'),
-    path('downvote/', downvote, name='downvote'),
+    path('upvote', upvote, name='upvote'),
+    path('downvote', downvote, name='downvote'),
     #path('new/', new_listing, name='new_listing'),
 ]
     
