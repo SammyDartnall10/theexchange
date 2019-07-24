@@ -47,33 +47,52 @@ That is the basis for this app- a place where people can post for the things the
 <h4>Mobile:</h4>
 <img src="readme_static/Layout_Mobile.png">
 
+<h1>Technologies Used</h1>
+
+<p>As a Django application app logic has be written primarily in Python 3 within the Django framework. 
+</p>
+<p>
+HTML, CSS, and JavaScript have be used to enhance the look and feel in the following ways.
+</p>
+<p>
+Rendering of pages was achieved using a combination of HTML5 and CSS. The Bootstrap 4 framework has been employed to achieve a consistent look and feel across the app and device sizes. 
+</p>
+<p>
+Javascript, and the JQuery  and ajax frameworks have been used to capture on-click events and modal popups, to enhance user experience and guide usage (prevent accidental deletion of records)
+</p>
+<p>
+TheExchange app is data-driven and relies on a mix of structured and unstructured data. CRUD operations are carried out using a postgres database, provisioned through Heroku. 
+</p>
+<p>
+Stripe payments are collected upon registering, setup up and managed using the Stripe API. Using the Stripe API in this way ensure the app is compliant with financial and data collection regulations. 
+</p>
+
 <h1>Features</h1>
 
 <p>Features deployed, and to be deployed are summarised in the following table</p>
 <img src="readme_static/Deployment.png">
 
-<h2>High level project purpose</h2>
+<h3>High level project purpose</h3>
 
 <p>This project is a full-stack site based around business logic used to control a centrally-owned dataset - namely - products and services that people are looking for, and able to offer. Authentication mechanisms and paid access to the site's data and other activities are based on this dataset, allowing only registered users to post listings, and find what others are looking for in return.</p> 
 
-<h2>Key Value Add</h2>
+<h3>Key Value Add</h3>
 
 <p>By authenticating on the site and paying for some of its services, users can use the site to find other businesses with whom they may swap goods and services, to the benefit and growth of both parties. Before authenticating, the user can find out how this works in the 'about' page.</p>
 
 <p>As access to the exchange, contact users and create listings is dependent on authentication, there is no way for a regular user to bypass the site's mechanisms and derive all of the value available to paid users without paying.</p>
 <p>In this way, the site owner is able to make money by providing this access as a set of services to the users. </p>
 
-<h2>Existing Features and Mandatory requirements</h2>
+<h2>Existing Features</h2>
 
-
-
-<p>All the CRUD (Create, Read, Update and Delete) operations have been fully deployed in the app. </p>
+<h3>Mandatory requirements</h3>
 
 <h4>Relational Database:</h4>
 <p> A postgres database provisioned through Heroku has been used. Users are able to login in and create, edit and delete data records pertaining to their own accounts - ie they can create and manipulate listings made for their company. </p>
 
 <h4>Multiple Apps:</h4>
 <p> Each distinct feature has been split into its own app as follows. This way each element of the website becomes reusable</p>
+
 - about : information about the site itself
 - accounts : registration and payments have been combined here, as registration and payment(subscription) occurs at the same time. Contains models for personal information, username, email etc.
 - busex : top level settings.py and urls.py
@@ -82,29 +101,42 @@ That is the basis for this app- a place where people can post for the things the
 - listing : models views and forms etc for creating, editing and viewing listings, both individually and as a group. 
 
 <h4>Design:</h4><p></p>
-- Authentication has been reused from an earlier CI project - logging in and logging out to maintain profile and add/edit listings
-    - Forgot Password feature has also been implemented in the event a user forgets login details
-    
 
-- E-commerce - a one off Stripe payment has been integrated into the registration form.  
+<h4>Authentication:</h4>
+<p>Authentication has been used for two main reasons. One - to make sure that only paid users can acccess the database/exchange, and find benefit in it. Secondly, so that users can maintain the information that is held on themselves personally, their company, and the listings they create and display on behalf of their company</p>
 
-- When a new user registers, an entry in a Company table is generated.
-    Editing company detail has been left until the user has logged in, to reduce the overhead in the sign up form. 
+<h4>User Interaction:</h4>
+<p>Listings are created using a form - this is (if validated) used to create Listings based on the Listing model in the backend.</p>
+<p>When a new user registers, an entry in a Company table is generated.
+    Editing company detail via a form has been left until the user has logged in, to reduce the overhead in the sign up form.</p>
 
-- Users can upload info and edit info on thier own business/Company
-- Each User can add thier own listings, also edit listings. 
-    Achive option for listings that have been fufilled. 
- 
+<h4>Stripe Payments :</h4>
+<p>One off payments are taken at registration - successful payment will grant the user acccess to the site. Stripes test functionality, as detailed below, is used to date - not real live payments.</p>
 
-- If logged in, users can see the contact details for Listings and respond to them
-- If logged in, users can upvote/like a listing to say “I also want this” - gives the listing a higher placed spot
+- Card : 4242 4242 4242 4242
+- CVC : 123 (or other 3 digit number)
+- Expiry : any date later than the current date. 
 
-- Logged in users can leave reviews on other users and give a rating. Overall rating for users displayed on each Companies page.
-- Having a high overall rating will rank the users listings higher in the exchange
+<h4>Structure and Navigation:</h4>
+<p>A responsive navigation menu is at the top of each page, and makes use of bootstrap functionality. Structured layout uses bootstrap extensively to maintain look and feel - see "Wireframes and Functional flows" under "UX" above </p>
 
-- Javascript used in pop-up forms/modals for adding reviews (also maybe adding new listings?)
+<h4>Use of JavaScript:</h4>
+<p>Javascript has been used in the form of modals - not requiring the user to leave the page to leave a reveiw.</p>
+<p>Ajax has been used in the exchange page so that the page does not need to be refreshed upon a user upvoting a listing</p>
 
-- Bootstrap to ensure usability across devices
+<h4>Documentation:</h4>
+<p>This README.md file is the means by which the project is explained - how it works and what its value is.</p>
+
+<h4>Version Control:</h4>
+<p>GitHub has been used throughout this project to maintain version control as feature are added. After adding a new feature, the code is pushed to GitHub.</p>
+
+<h4>Attribution:</h4>
+<p>Reuse of code is highlighted in comments, There are two large general instances of reuse of code - this is in the accounts app and the stripe payments. Code for each of these elements was based on a previous Code Institue module - my forked version of which can be found  [HERE](https://github.com/SammyDartnall10/PuttingItAllTogether-Ecommerce/tree/master/02-FindingAndPurchasingProducts/08-stripe_javascrip)</p>
+<p>The above code is in turn based on Djangos [inbuilt authentication mechanisim](https://docs.djangoproject.com/en/2.2/topics/auth/), and [stripes API](https://stripe.com/docs).</p>
+
+<h4>Deployment:</h4>
+<p>The app is deployed through Heroku. Within Heroku the app is linked to the GitHub branch, in this case the master. See the "Deployment" section for more detail on how this was carried out </p>
+
 
 <h2>Features Left to Implement (optional)</h2>
 
@@ -115,19 +147,7 @@ That is the basis for this app- a place where people can post for the things the
 - 
 
 
-<h1>Technologies Used</h1>
 
-As a Django application app logic has be written primarily in Python 3 within the Django framework. 
-
-HTML, CSS, and JavaScript have be used to enhance the look and feel in the following ways.
-
-Rendering of pages was achieved using a combination of HTML5 and CSS. The Bootstrap 4 framework has been employed to achieve a consistent look and feel across the app and device sizes. 
-
-Javascript, and the JQuery  and ajax frameworks have been used to capture on-click events and modal popups, to enhance user experience and guide usage (prevent accidental deletion of records)
-
-The Alt_Work app is data-driven and relies on a mix of structured and unstructured data. CRUD operations are carried out using a postgres database, provisioned through Heroku. 
-
-Stripe payments are collected upon registering, setup up and managed using the Stripe API. Using the Stripe API in this way ensure the app is compliant with financial and data collection regulations. 
 
 <h1>Testing</h1>
 
