@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'about',
     'accounts',
-    'exchange',
     'landing',
     'listing',
     'storages',

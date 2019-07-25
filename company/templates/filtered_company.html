@@ -9,6 +9,7 @@
     <h1>Company Search Results</h1>
   </div>
   
+<div class="col-md-6 panel">  
 <div id="form-content">
     <form action="{% url 'filtered_company' %}" method="POST">
         {% csrf_token %}
@@ -20,6 +21,7 @@
         </div>
       </div>
     </form>
+</div>
 </div>
 
   

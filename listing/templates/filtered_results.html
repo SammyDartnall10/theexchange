@@ -6,9 +6,10 @@
 
 <div class="row">
   <div class="col-12">
-    <h1>Listings Page</h1>
+    <h1>Listings Search Results</h1>
   </div>
   
+<div class="col-md-4 panel">  
 <div id="form-content">
     <form action="{% url 'filtered_results' %}" method="POST">
         {% csrf_token %}
@@ -21,10 +22,11 @@
       </div>
     </form>
 </div>
-
-  
+</div>
+ 
+<div class="col"> 
   {% for listing in listings %}
-  <div class="col-md-4">
+  <div class="col">
     <div class="card">
       <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
       <div class="card-body">
@@ -39,6 +41,7 @@
   </div>
   </div>
   {% endfor %}
+</div>
 </div>
 
 

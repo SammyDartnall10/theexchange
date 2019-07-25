@@ -20,7 +20,6 @@ from django.contrib import admin
 from django.urls import path, include
 from landing import urls as urls_landing
 from about import urls as urls_about
-from exchange import urls as urls_exchange
 from accounts import urls as urls_account
 from listing import urls as urls_listing
 from company import urls as urls_company
@@ -33,7 +32,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing.urls')),
     path('about/', include('about.urls')),
-    path('exchange', include('exchange.urls')),
     path('accounts/', include('accounts.urls')),
     path('listing/', include('listing.urls')),
     path('company/', include('company.urls')),

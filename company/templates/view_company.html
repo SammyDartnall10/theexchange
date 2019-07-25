@@ -29,46 +29,52 @@
     </div>
         {% endif %}
 
-    <div class="row">
+<div class="row panel">
+<!------Left side panel---------------------------------------------------------------------------------------------------------------------->
         
         <div class="col-md-6">
-            <span><h3>{{ company.business_name }}</h3></span>
-            <span><p>{{ company.contact_email }}</p></span>
-        </div>
-        
-        <div class="col-sm-10 col-md-4">
-            <img class="profile_image resize" src="{{ MEDIA_URL }}{{ company.logo }}" alt="Company Logo">
-        </div>
-        
-        <div class="col-md-6">
-            <h5>About Us/Bio:</h5> <p>{{ company.about_us }}</p>
-        </div>
-        
-        <div class="col-md-6">
-            <h5>Primary Industry:</h5> <p>{{ company.industry }}</p>
-        </div>
-        
-        <div class="col-md-6">
-            <h5>Registered Business Address:</h5> <p>{{ company.address }}</p>
-        </div>
-        
-        
-        <div class="col-md-6">
-            <div class="col-md-6">
-                <h5>Overall Rating:</h5> <p>{{ company.average_review }}</p>
+            <div>
+                <span><h3>{{ company.business_name }}</h3></span>
             </div>
-            <h5>Overall Rating:</h5> 
-            
-            {% for key, value in company.average_review.items %}
-            <p>{{ value }}</p>
-            {% endfor %}
-            
-        </div>
-           
-    </div>
+            <div>
+                <span><p>{{ company.contact_email }}</p></span>
+            </div>
+            <div>
+                <img class="profile_image resize" src="{{ MEDIA_URL }}{{ company.logo }}" alt="Company Logo">
+            </div>
+            <div>
+                <h5>About Us/Bio:</h5> 
+                <p>{{ company.about_us }}</p>
+            </div>
+            <div>
+                <h5>Overall Rating:</h5> 
+                
+                {% for key, value in company.average_review.items %}
+                <p>{{ value }}</p>
+                {% endfor %}
+            </div>
 
+        </div>
+    
+<!-------Right side panel------------------------------------------------------------------------------------------------------------------->
+     
+        <div class="col-md-6">
+            <div class="col" id="map"></div>
+            <div class="col-md-6" >
+                <h5>Registered Business Address:</h5> 
+                <p id="companyCity">{{ company.city }}</p>
+                <p>{{ company.country }}</p>
+            </div>
+            <div class="col-md-6">
+                <h5>Primary Industry:</h5> <p>{{ company.industry }}</p>
+            </div>
+        </div>
+        
+</div>        
+        
+        
 <div class="row">
-    <div class="col">
+    <div class="col-md-6">
         
         <!-- Button trigger modal -->
     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#reviewModal">Add a review</button>
@@ -105,17 +111,18 @@
             </div>
         </div>
     </div>
-</div>
 
-<div>
+
+
+<div class="col-md-6">
 <h5>Recent Reviews</h5>
-</div>
+
 {% for review in reviews %}
   <div class="col">
         <h6>{{ review.created_by }}</h6>
         <p>{{ review.content|truncatewords:20 }}</p>
   </div>
   {% endfor %}
-
-
+</div>
+</div>
 {% endblock %}
