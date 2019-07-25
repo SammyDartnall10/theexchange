@@ -86,6 +86,8 @@ Each distinct feature has been split into its own app as follows. This way each 
 
 #### Design:
 
+*TODO  - database design pdf - data flows*
+
 #### Authentication:
 Authentication has been used for two main reasons. One - to make sure that only paid users can acccess the database/exchange, and find benefit in it. Secondly, so that users can maintain the information that is held on themselves personally, their company, and the listings they create and display on behalf of their company
 
@@ -123,20 +125,26 @@ The above code is in turn based on Djangos [inbuilt authentication mechanisim](h
 The app is deployed through Heroku. Within Heroku the app is linked to the GitHub branch, in this case the master. See the "Deployment" section for more detail on how this was carried out 
 
 ### Project-specific features (in additon to mandatory features)
-- Use of Googles API to show location of businesses. As some businesses may be based out of peoples homes, location is based on city, rather than street address to protect privacy. 
+- Use of Googles Geocoder and Places API to show location of businesses. As some businesses may be based out of peoples homes, location is based on city, rather than street address to protect privacy. 
+
 - Ranking of listings based on upvotes: 
 By ranking the listings, users can see what others are looking for the most, and tailor their own offerings to match
+
 - Search for listings feature :
 Based on tags, users can search for listings where others are searching for specific things
+
 - Search for businesses : 
 Users can search for other companies based on company name, location or main business type. 
-- Users can leave reviews/testimonials on other companies, and a rating out of 5. This rating is dispalyed in the users business profile. 
+
+- Users can leave reviews/testimonials on other companies, and a rating out of 5. This rating is dispalyed in the users business profile. Users with a higer overall rating will be displayed higher in searches 
 
  
 ## Features Left to Implement (Big grand ideas)
 
 - In-app messaging - at the moment contact is done through providing an email for people to contact. A potential development could be to create a means for users to send messages, live or not within the app, increasing engagement with the app. 
+
 - Standard means for sending propoals - similar to other freelancer sites. Send this to a table, whereit is stored in our database. With this information comparisons on proposals can be made by the user. Once a larger set of data is collected data analysis can also show what products are being swapped for what, which are the most popular products and services are being asked for and offered, among other insights. 
+
 - Sending 'karma' to other user as either a thanks, or in a much later version of the app, to make up the difference in a swap. Users can also be given karma in return for products and services - this karma can be used at a later date to make up the difference in exchanges. 
 
 
@@ -190,7 +198,7 @@ Run the app with $ python3 app.py
 
 A huge thanks to my sister and boyfriend for helping me in many ways, but especially in helping me extensively test this site, to make sure all operations and key tasks can be carried out easy and correctly.
 
-Thanks also to my mentors Aaron Sinnot for helping me build my understanding of how python, the Django framework and how relational databases work, providing direction and helping to squish those pesky bugs that keep popping up! 
+Thanks also to my mentor Aaron Sinnot for helping me build my understanding of how python, the Django framework and how relational databases work, providing direction and helping to squish those final niggly bugs that evaded me until the end! 
 
 Also, once again, I really cannot emphasise my thanks enough to the code institue tutors for their patience and help over countless hours. Without their direction I would still be half way through this course! 
 
