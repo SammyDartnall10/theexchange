@@ -6,43 +6,59 @@
 
 <div class="row">
   <div class="col-12">
-    <h1>The Exchange</h1>
+    <h1>Search all listings</h1>
+</div>
+  
+<div class="row">
+  <div class="col-md-4">
+    <div id="form-content">
+        <form action="{% url 'filtered_results' %}" method="POST">
+            {% csrf_token %}
+          <div class="row">
+            <div class="col">
+              <div class="row">
+              <label for="searchListings">Search for listings by keyword</label>
+                <input name="search-listings" type="text">
+              </div>
+              <div class="row">
+                <input type="submit" id='submit' class='btn btn-outline-dark type-search button-spacing' value="Search" />
+              </div>
+            </div>
+          </div>
+        </form>
+    </div>
   </div>
   
-<div id="form-content">
-    <form action="{% url 'filtered_results' %}" method="POST">
-        {% csrf_token %}
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <label for="searchListings">Search for listings</label>
-            <input name="search-listings" type="text">
-            <input type="submit" id='submit' class='btn btn-dark type-search' value="Search" />
-        </div>
-      </div>
-    </form>
-</div>
+  <div class="col-md-4">
+    <div id="form-content">
+        <form action="{% url 'filtered_company' %}" method="POST">
+            {% csrf_token %}
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <label for="searchCompany">Search for a business by name</label>
+                  <input name="search-company" type="text">
+              </div>
+              <div class="row">
+                <input type="submit" id='submit' class='btn btn-outline-dark type-search button-spacing' value="Search" />
+              </div>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+  </div>
 
-<div id="form-content">
-    <form action="{% url 'filtered_company' %}" method="POST">
-        {% csrf_token %}
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <label for="searchCompany">Search for a business</label>
-            <input name="search-company" type="text">
-            <input type="submit" id='submit' class='btn btn-dark type-search' value="Search" />
-        </div>
-      </div>
-    </form>
-</div>
-</div>
 
-<div class="row"> 
+<div class="row "> 
+
   {% for listing in listings %}
   
-  
   <div class="col-md-4 ">
-    <div class="card h-100 ">
-      <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
+    <div class="card mb-3">
+      <div class = "card-header">
+        <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
+      </div>
       <div class="card-body">
         <a href="{% url 'view_listing' listing.id %}"><h3 class="card-title">{{ listing.title }}</h3></a>
         <p class="card-text">{{ listing.content|truncatewords:20 }}</p>
@@ -57,9 +73,11 @@
   </div>
   </div>
   
-  
   {% endfor %}
-</div>
+  </div>
+
+
+
 {% endblock %}
 
 

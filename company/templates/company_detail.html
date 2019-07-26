@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="row panel">
-<!------Left side panel---------------------------------------------------------------------------------------------------------------------->
         
-        <div class="col-md-6">
+<!------Top - name and Email---------------------------------------------------------------------------------------------------------------------->
+        <div class="col-12">
             <div>
                 <span><h3>{{ company.business_name }}</h3></span>
             </div>
             <div>
                 <span><p>{{ company.contact_email }}</p></span>
             </div>
+        </div>
+<!------Left side panel---------------------------------------------------------------------------------------------------------------------->
+
+        <div class="col-md-6">
             <div>
                 <img class="profile_image resize" src="{{ MEDIA_URL }}{{ company.logo }}" alt="Company Logo">
             </div>
@@ -41,16 +45,17 @@
         </div>
         
 <!--------edit buttons----------------------------------------------------------------------------------------------------------------->
-        
-        <div class="col-md-6">
+    <div class="row justify-content-center button-spacing">   
+        <div class="col">
             <div>
-                <a href="{% url 'profile' %}" class="btn btn-default">Back to Profile</a>
-                <a href="{% url 'edit_company' company.id %}" class="btn btn-default">Edit Company Details</a>
+                <a href="{% url 'profile' %}" class="btn btn-outline-dark" role="button">Back to Profile</a>
+                <a href="{% url 'edit_company' company.id %}" class="btn btn btn-outline-dark" role="button">Edit Company Details</a>
             </div> 
         </div> 
-<!---------------------------------------------------------------------------------------------------------------------------------------->
-
     </div>
+<!---------------------------------------------------------------------------------------------------------------------------------------->
+</div>
+    
     
 {% endblock %}
 

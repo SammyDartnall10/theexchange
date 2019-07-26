@@ -32,13 +32,15 @@
 <div class="row panel">
 <!------Left side panel---------------------------------------------------------------------------------------------------------------------->
         
-        <div class="col-md-6">
+        <div class="col-12">
             <div>
                 <span><h3>{{ company.business_name }}</h3></span>
             </div>
             <div>
                 <span><p>{{ company.contact_email }}</p></span>
             </div>
+        </div>
+        <div class="col-md-6">
             <div>
                 <img class="profile_image resize" src="{{ MEDIA_URL }}{{ company.logo }}" alt="Company Logo">
             </div>
@@ -74,10 +76,10 @@
         
         
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 button-spacing">
         
         <!-- Button trigger modal -->
-    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#reviewModal">Add a review</button>
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#reviewModal">Add a review</button>
     </div>
     
     <!-- Modal -->
@@ -99,14 +101,14 @@
                             <div class="col-12 col-md-6">
                               <label for="searchCompany">Add a Review</label>
                                   {{ company_form.as_p }}
-                                <input type="submit" id='add_review' class='btn btn-dark type-search' value="Add_Review" />
+                                <input type="submit" id='add_review' class='btn btn-outline-dark type-search' value="Add_Review" />
                             </div>
                           </div>
                         </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ooops- take me back!</button>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Ooops- take me back!</button>
                 </div>
             </div>
         </div>

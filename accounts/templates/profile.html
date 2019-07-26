@@ -28,14 +28,14 @@
                 <form role="form" method="POST" id="edit_profile" action="{% url 'edit_profile' profile.id %}">
                     {% csrf_token %}
                     <div class="form-group ">
-                        <input class=" btn btn-primary" id="profile_detail_btn" name="profile_detail" type="submit" value="Edit Personal Details">
+                        <input class=" btn btn-outline-dark" id="profile_detail_btn" name="profile_detail" type="submit" value="Edit Personal Details">
                     </div>
                 </form>
                 
                 <form role="form" method="POST" id="company_detail" action="{% url 'company_detail' company.id %}">
                     {% csrf_token %}
                     <div class="form-group ">
-                        <input class=" btn btn-primary" id="company_detail_btn" name="company_detail" type="submit" value="Company Details">
+                        <input class=" btn btn-outline-dark" id="company_detail_btn" name="company_detail" type="submit" value="Company Details">
                     </div>
                 </form>
             </div>
@@ -67,7 +67,7 @@
                     <form role="form" method="POST" id="listing_detail" action="{% url 'listing_detail' listing.id %}">
                         {% csrf_token %}
                         <div class="form-group ">
-                            <input class=" btn btn-primary" id="listing_detail_btn" name="listing_detail" type="submit" value="See Detail">
+                            <input class=" btn btn-outline-dark btn-sm" id="listing_detail_btn" name="listing_detail" type="submit" value="See Detail">
                         </div>
                     </form>
                     

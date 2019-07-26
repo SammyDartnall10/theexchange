@@ -1,3 +1,65 @@
+/*--------- Setting typography/styles for standard elements------------*/
+
+h1 {
+    color: #787878;
+    font-family: 'Cormorant Garamond', serif;
+    margin-top: 10px;
+    margin-top: 20px;
+}
+
+h2 {
+    color: black;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+}
+
+h3 {
+    color: black;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+}
+
+h4 {
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h5 {
+    color: black;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: bolder;
+    margin-top:20px;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*--------- Giving elements a bit of breathing space------------*/
+
+body { 
+    padding-top: 65px; 
+}
+
+form {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.button-spacing{
+    margin-top: 50px;
+    
+}
+
+.card-spacing{
+    margin-top:20px;
+}
+
+
+/*--------- Overwrite bootsrap and text decoration------------*/
+a{
+    text-decoration:none !important;
+    color: #787878;
+}
+
 .listing {
     background-size: contain;
     background-position: center center;
@@ -7,18 +69,56 @@
     margin: 0 auto;
 }
 
-h1 {
-    color: green;
+/*--------- Styling specific to landing page------------*/
+.title{
+    font-family: 'Cormorant Garamond', serif;
+    font-size:60px;
+    font-weight: bolder;
 }
 
-body { 
-    padding-top: 65px; 
+.top-panel{
+    height:20vh;
 }
+
+.bottom-panel{
+    /*Keep title just above panels below*/
+    height:10vh;
+} 
+
+/*--------- Taking out padding and gutters, otherwise content overflows container------------*/
+.navpanelcolnopadding{
+    padding: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+  
+}
+
+.navpanel {
+    width: 65%;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    font-size: 80px;
+    
+}
+
+/*---------Navigation panel - same across whole site---------------------*/
+.navbar{
+    font-family: 'Cormorant Garamond', serif;
+    
+}
+
+/*-----------------------------------------------------*/
+
 
 .panel{
     background-color: #e6ffff;
       padding: 30px; 
-      border-radius: 10px;
+      border-radius: 5px;
 }
 
 .listingspanel{
@@ -26,22 +126,23 @@ body {
     border-bottom-width: 1px;
 }
 
-.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
+/*-----------------------------------------------------*/
 
-    text-decoration: none;
-    color: blue;
-}
+/*----------Company form submitted at same time as registering - triggers a new company entry in database. 
+Not shown on signup form to reduce overhead to reduce overhead to users when siging up - they can then 
+edit later in profile. -------------------------------*/
 
 .company_form{
     display: none;
 }
 
+/*---------------Using VW so it will resize with device used----------------------------------*/
+
 .profile_image{
-    max-width: 30vw;
+    max-width: 20vw;
 }
+
+/*-----------Need to give map height otherwise wont display correctly---------------------------------*/
 
 #map {
   width: 100%;
@@ -49,7 +150,13 @@ body {
   background-color: grey;
  }
 
-/*.nonfield {
-    display: none;
-}
+/*
+
+Keeping font families here for ease of copy paste
+
+font-family: 'Cormorant Garamond', serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Fira Sans Extra Condensed', sans-serif;
+
 */
+

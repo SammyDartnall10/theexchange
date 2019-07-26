@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% block page_title %}Login Page{% endblock %}
 
-{% block page_heading %}User Login{% endblock %}
 
 {% block content %}
-<h1>Sign in form </h1>
-<h5> Pops up over index page when button clicked. </h5>
+<h1>Sign in to your account here </h1>
+
 
 <form method="POST">
         {% csrf_token %}
             {{ login_form }}
-    <button type = "submit"> Login</button>
+    <div class="col-12 button-spacing">
+    <button class=" btn btn-outline-dark" type = "submit"> Login</button>
+    </div>
 </form>
 
 <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
