@@ -7,19 +7,12 @@
 <div class="row">
     <div class="col-sm-4 panel">
         <div>
-            <h4>{{ user }}'s Profile</h4> 
-        </div>
-            
-        <div>
-            <p> {{ profile.email }} </p>
+            <h2> Hi {{ user.first_name }}!</h2> 
         </div>
         <div>
-            <h5>Overall Rating:</h5>
-            
-            {% for key, value in avg_rating.items %}
-            <p>{{ value }}</p>
-            {% endfor %}    
+            <p>Edit your personal or company details below, or add and manage your business listings in the "My Listings" section</p>
         </div>
+        
         
         
         <div>
@@ -41,7 +34,16 @@
             </div>
         </div>
         <div>
-        <h5>Recent Reviews</h5>
+        <div>
+            <h5>Overall Rating:</h5>
+            
+            {% for key, value in avg_rating.items %}
+            <p>{{ value }}</p>
+            {% endfor %}    
+        </div>
+        <div>
+            <h5>Recent Reviews</h5>
+        </div>
         </div>
             {% for review in reviews %}
               <div class="col">
@@ -54,15 +56,20 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------->
     
     <div class="col-sm-8 listingspanel">
-        <h1> My Listings </h1>
-        <p><a href="{% url 'listing' %}">New Listing</a></p>
-        <div class="row row-flex">
+        <div class="row ">
+            <h1> My Listings </h1>
+        </div>
+        <div class=" row card-spacing">
+            <a href="{% url 'listing' %}" class="btn btn-outline-dark" role="button">Add a New Listing</a>
+
+        </div>
+        <div class="row">
             {% for listing in listings %}
               <div class="col-md-4">
-                <div class="card">
+                <div class="card mb-3">
                   <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
                   <div class="card-body">
-                    <a href=""><h3 class="card-title">{{ listing.title }}</h3></a>
+                    <a href=""><h4 class="card-title">{{ listing.title }}</h4></a>
                     <p class="card-text">{{ listing.content|truncatewords:20 }}</p>
                     <form role="form" method="POST" id="listing_detail" action="{% url 'listing_detail' listing.id %}">
                         {% csrf_token %}

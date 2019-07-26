@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 class CustomUser(models.Model):
     username = models.CharField(max_length=255)
     email = models.EmailField()
+    first_name = models.CharField(max_length=255, default="first name")
+    last_name = models.CharField(max_length=255, default="last name")
     
     
     
