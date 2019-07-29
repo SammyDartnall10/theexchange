@@ -29,6 +29,11 @@ h5 {
     margin-top:20px;
 }
 
+h6{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bolder;
+}
+
 p {
     font-family: 'Open Sans', sans-serif;
 }

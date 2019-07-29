@@ -35,6 +35,7 @@
         </div>
         <div>
         <div>
+            <h2>See what others are saying about you:</h2>
             <h5>Overall Rating:</h5>
             
             {% for key, value in avg_rating.items %}
@@ -48,7 +49,10 @@
             {% for review in reviews %}
               <div class="col">
                     <h6>{{ review.created_by }}</h6>
-                    <p>{{ review.content|truncatewords:20 }}</p>
+                    <h6>Rating: {{ review.rating }}</h6>
+                    
+                    <p>"{{ review.content|truncatewords:20 }}"</p>
+                    <h1></h1>
               </div>
              {% endfor %}
         
