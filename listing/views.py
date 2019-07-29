@@ -33,6 +33,7 @@ def get_listings(request):
     upvoted = Upvotes.objects.filter(voter = user).values_list('listing_upvoted', flat=True) #list to check to see if listing has been liked by user
    
     listings = Listing.objects.all()
+    #listings = Listing.objects.all().orderby('upvotes')
     print (listings)
           
     return render(request, "exchange.html", {'listings': listings, 'upvoted': upvoted})
