@@ -18,6 +18,7 @@ cryptography==2.1.4
 distro-info===0.18ubuntu0.18.04.1
 dj-database-url==0.5.0
 Django==2.2.3
+django-bootstrap-form==3.4
 django-forms-bootstrap==3.1.0
 django-storages==1.7.1
 docutils==0.14
