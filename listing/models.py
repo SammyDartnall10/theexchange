@@ -33,14 +33,14 @@ class Listing(models.Model):
         total_count = count_upvotes.count()
         
         return total_count
-    #archive = models.BooleanField() figure this out later...
-    #user added in here to create a location to store the values with everything in the database
-
+    
     def __str__(self):
         return self.title
 
 
-    
+    #archive = models.BooleanField() figure this out later...
+    #user added in here to create a location to store the values with everything in the database
+
 
 
 class Upvotes(models.Model):
