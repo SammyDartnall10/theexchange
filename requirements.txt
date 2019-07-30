@@ -69,6 +69,6 @@ stripe==2.32.1
 systemd-python==234
 Twisted==17.9.0
 
-unattended-upgrades==0.1
+
 urllib3==1.25.3
 zope.interface==4.3.2
