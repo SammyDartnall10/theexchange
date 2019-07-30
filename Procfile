@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn pcswimming.wsgi:application
+web: gunicorn busex.wsgi:application
