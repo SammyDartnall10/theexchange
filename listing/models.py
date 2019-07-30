@@ -26,24 +26,29 @@ class Listing(models.Model):
     tag = models.TextField()
     can_offer = models.TextField(default="Please detail the things you can offer in return as single words, eg catering, photography")
     created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
-    #total_upvotes = models.IntegerField(default=self.upvotes, blank=False)
+    #total_upvotes = models.ForeignKey(Total, related_name="upvotes")
     @property
     def upvotes(self):
         count_upvotes = self.upvotes_set.all()
         total_count = count_upvotes.count()
+        
         return total_count
     #archive = models.BooleanField() figure this out later...
     #user added in here to create a location to store the values with everything in the database
 
+    def __str__(self):
+        return self.title
 
- 
 
-    def __unicode__(self):
-        return self.title;
+    
+
 
 class Upvotes(models.Model):
     voter = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
     listing_upvoted = models.ForeignKey(Listing, null=True, default="Default Business Name", on_delete=models.SET_DEFAULT)
+    
+    def __str__(self):
+        return self.listing_upvoted
 
 #TODO add in email validator
 

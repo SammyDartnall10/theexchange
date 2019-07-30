@@ -4,11 +4,7 @@
 function upvote(e){
     var pk = $(e).attr('id');
         
-        var colour = document.getElementById(pk).style.cssText;
-        console.log(colour);
-        
-        if ( colour = "black") {
-            console.log("turn it red");
+            console.log("upvoting");
             console.log(document.getElementById(pk));
             document.getElementById(pk).style = "color: red";
             $.ajax({
@@ -22,10 +18,13 @@ function upvote(e){
                             }
                 });
                     
-        } 
-        else 
-        {
-                
+        
+}
+           
+           
+function downvote(e){
+    var pk = $(e).attr('id');
+    
             console.log("it must be red, so turn it black");
             console.log(document.getElementById(pk));
             document.getElementById(pk).style = "color: black";
@@ -39,7 +38,7 @@ function upvote(e){
                    document.getElementById(pk).scrollIntoView();
                         }
             });
-        }
+        
     }
 
 /*---------Places API - Google------------------------------------------------*/

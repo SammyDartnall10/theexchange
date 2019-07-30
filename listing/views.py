@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from .models import Listing, Upvotes
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+
 
 # Create your views here.
     
@@ -33,7 +35,13 @@ def get_listings(request):
     upvoted = Upvotes.objects.filter(voter = user).values_list('listing_upvoted', flat=True) #list to check to see if listing has been liked by user
    
     listings = Listing.objects.all()
-    #listings = Listing.objects.all().orderby('upvotes')
+    #listings = Listing.objects.all().order_by('upvotes')
+    #listings = Listing.objects.distinct('title').order_by('upvotes')
+    
+    #listings = Listing.objects.annotate(count=Count('upvotes_set__id')).order_by('count')
+                
+                
+    #listings = Listing.objects.values('title').distinct().order_by('upvotes') 
     print (listings)
           
     return render(request, "exchange.html", {'listings': listings, 'upvoted': upvoted})
