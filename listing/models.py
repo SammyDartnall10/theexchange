@@ -35,8 +35,8 @@ class Upvotes(models.Model):
     voter = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
     listing_upvoted = models.ForeignKey(Listing, null=True, default="Default Business Name", on_delete=models.SET_DEFAULT)
     
-    def __str__(self):
-        return self.listing_upvoted
+    def __int__(self):
+        return self.id
 
 
 

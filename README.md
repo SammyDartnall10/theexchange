@@ -86,7 +86,19 @@ Each distinct feature has been split into its own app as follows. This way each 
 
 #### Design:
 
-*TODO  - database design pdf - data flows*
+Design of the database is made up of five main tables. 
+- Users: Personal details on the user who signed up for the business account. 
+- Company: This has been separated out for a number of reasons:
+    - To reflect business setup - owners will normally register thier business as a separate entity to themselves
+    - There are many elements that both people and companies can have, that may differ. For example, address, contact details
+    - To allow for scaling of the project, where many unique users may belong to one company.
+- Listings: Users can make many listings for goods and services, on behalf of the Company
+- Reviews: Many Users can make Many reviews about companies. To ensure a Many to One Relationship, the Review table bridges between Users and Companies. 
+- Upvotes: Many Users can make Many upvotes. The Upvotes table collects the upvotes a user has made. The Lisitng and User models can then pull from this table as needed, eg to count number of listings.
+
+A diagramatic representation of this schema is below: 
+
+![Datebase](/media/readme_static/DB.png)
 
 #### Authentication:
 Authentication has been used for two main reasons. One - to make sure that only paid users can acccess the database/exchange, and find benefit in it. Secondly, so that users can maintain the information that is held on themselves personally, their company, and the listings they create and display on behalf of their company
