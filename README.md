@@ -1,20 +1,20 @@
 # The Exchange
 
-Want to swap some stuff? Look no further 👉 >> (link for deployed app)
+Want to swap some stuff? Look no further 👉 >> <https://businessexchange.herokuapp.com/>
 
-The inspiration for this project came from my own conversations with freelancers, and small business owners trying to get their dream off the proverbial ground. 
+The inspiration for this project came from my own conversations with freelancers, and small business owners planning on, or in the midst of launching thier own businesses. 
 
-One common theme would emerge from these conversations - as solo entrepreneurs, freelancers and side hustlers, money for setup and launch is fairly small. However, the range of things you can spend this small amount of money on is seemingly endless. No longer do you need a website, you also need SEO, an Instagram and Facebook presence, and constant 'real' interaction with your hard-earned followers. It’s not enough to take basic photos of your product - you need a photoshoot, professionally staged, and then someone to edit these photos before they go online. Caterers to feed the attendees at launch parties, staff to help you man the tent when selling at markets or festivals. 
+One common theme emerged from these conversations - the amount of money small businesses have for initial launch is typically very small. However, the range of things you can spend this small amount of money on is seemingly endless. No longer do you need a website, you also need SEO, an Instagram and Facebook presence, and constant 'real' interaction with your hard-earned followers. It’s not enough to take basic photos of your product - you need a photoshoot, professionally staged, and then someone to edit these photos before they go online. Caterers to feed the attendees at launch parties, staff to help you man the tent when selling at markets or festivals. 
 Suddenly - the cost of launching your passion with the impact it deserves is looking more and more unattainable. 
 If only we had the budget of large corporates - right? 
 
 Wrong.
 
-What we, small business owners, contractors and entrepreneurs have, is range of products and services we "can offer". 
+What we, small business owners, contractors and freelancers have, is range of products and services we "can offer". 
 
-Our businesses may be in photography, catering, flower arrangement, recruitment, web development. And the multiskilled people we are - our skill sets will often branch out beyond that of our core business. The photographer who can retouch photos in a second in lightroom, the chef who is also a sound business management coach. 
+Our businesses may be in one core area -photography, catering, flower arrangement, recruitment, web development. However, the multiskilled people we are - our skill sets will often branch out beyond that of our core business. The photographer who can retouch photos in a second in lightroom, the chef who is also a sound business management coach. 
 
-What if we could swap our products and services, in return for those we need? If you've been to a networking evening, you'll be familiar with the format - What are you looking for, what is your "ask"? And what can you "offer" in return?
+What if we could swap our broad range of products and services in return for those we need? If you've been to a networking evening, you'll be familiar with the format - What are you looking for, what is your "ask"? And what can you "offer" in return?
 
 That is the basis for this app- a place where people can post for the things they need, and what they can swap for it in return. 
 
@@ -24,7 +24,7 @@ That is the basis for this app- a place where people can post for the things the
 
 The following Use Cases summarise the four main groups of users that would use this app (names changed and stock photos used for anonymity purposes)
 
-<img src="readme_static/Use_Stories_Cropped.jpg">
+![UserStories](/media/readme_static/UserStoriesCropped.png)
 
 The functional specifications driven by these use cases are as follows:
 
@@ -225,7 +225,7 @@ The site has been deployed using Heroku. The process for deploying to Heroku is 
 - Choose either automatic or manual deploys. In whichever you choose, select the branch in the GitHub repository you wish to deploy. 
 
 
-Final deployed site is here: *heroku site*
+Final deployed site is here: <https://businessexchange.herokuapp.com/>
 
 
 
