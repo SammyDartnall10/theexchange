@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseForbidden, HttpResponse
-from .forms import NewListing, NewListingArchive, UploadUpvotes
+from .forms import NewListing, UploadUpvotes
 from django.contrib.auth.models import User
 from .models import Listing, Upvotes
 from django.views.decorators.csrf import csrf_exempt
@@ -115,35 +115,4 @@ def downvote(request):
     downvote_instance = Upvotes.objects.filter(voter=voter, listing_upvoted=listing).delete()
     
     return render(request, 'exchange.html')
-    
-"""
-def create_listing(request, pk=None):
-    #Create a post - looks to see if theres an existing post
-    listing = get_object_or_404(Listing, pk= pk) if pk else None
-    if request.method == "POST":
-        form = NewListing(request.POST, request.FILES, instance=listing)
-        if form.is_valid():
-            listing = form.save()
-            return redirect(listing, listing.pk)
-    else:
-        form= NewListing(instance=listing)
-    return render(request, 'createnew.html', {'form': form})
-""" 
 
-def create_listing_archive(request):
-    print(request.user)
-    if not request.user.is_authenticated:
-        return redirect('login')
-    else:
-        if request.method == "POST":
-            form = NewListing(request.POST, request.FILES)
-            if form.is_valid():
-                listing = form.save(commit=False)
-                listing.owner = request.user
-                listing.save()
-                return redirect('profile')
-        else:
-            form = NewListing()
-
-
-    return render(request, 'createnew.html', {'form': form})

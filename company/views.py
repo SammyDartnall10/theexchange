@@ -52,9 +52,7 @@ def filtered_company(request):
     """
     if request.method =="POST":
         search_criteria = request.POST.get('search-company')
-        print(search_criteria)
         companies = CompanyDetail.objects.filter(business_name__contains=search_criteria)
-        print(type(companies))
         return render(request, "filtered_company.html", {'companies': companies})
     else:
         return HttpResponse("Sorry, no results for that business - please try again")

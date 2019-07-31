@@ -32,6 +32,7 @@ class CompanyDetail(models.Model):
     country = models.CharField(max_length=254, null=True, default="Canada", blank=True)
     logo = models.ImageField(upload_to='images', null=True, blank=True)
     created_by = models.ForeignKey(User, null=True, default="1", on_delete=models.SET_DEFAULT)
+    remote = models.BooleanField()
     @property
     def average_review(self):
         reviews = self.companyreview_set.all()

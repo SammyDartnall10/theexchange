@@ -177,21 +177,43 @@ Packages in Node.js, or perhaps online hosting were options, but out of the scop
 
 # Deployment
 
-GitHub has been used throughout this project to maintain version control as feature are added. After adding a new feature, the code is pushed to GitHub.
+GitHub has been used throughout this project to maintain version control as feature are added. After adding a new feature, the code is pushed to GitHub with an appropriate commit message.
+
+To run locally, create a new workspace in your local computer. 
+
+- Use $ git clone https://github.com/SammyDartnall10/alt_work.git to create a local copy of the code. 
+- Install requirements with $ pip3 install -r requirements.txt
+- This project relies on S3 for image and static file storage, and a postgres database as provisioned for by Heroku. However the Django SQLite will work just as well for local serving.
+- This project also uses the Stripe API. To collect payments in a local installation the user must signup for their own Stripe account.
+- The env.py file is not pushed to GitHub, therefore for local running you will need to use your own unique variables for the following:
+    - Stripe publishable
+    - Stripe secret
+    - Database URL (if linking to postgres database - otherwise the SQLite will work fine)
+    - AWS Access Key Id
+    - AWS Secret Access Key
+    
+- Run the app with $ python3 manage.py $IP:$PORT
 
 The site has been deployed using Heroku. The process for deploying to Heroku is as follows: 
 - In your Heroku account, create a new app
-- Under the setting tab in the app, reveal and change the 'config vars' to IP 0.0.0.0 and PORT 5000. 
-- Ensure in your app you have in your app files in GitHub a Procfile with the following: 'web: python app.py', and you project requirements in a requirements.txt file. 
+- Under the setting tab in the app, reveal and change the 'config vars' to: 
+    - IP 0.0.0.0
+    - PORT 5000
+    - Stripe Publishable (as per your unique settings)
+    - Stripe Secret (as per your unique settings)
+    - Database URL (as per your unique settings)
+    - AWS Access Key Id (as per your unique settings)
+    - AWS Secret Access Key (as per your unique settings)
+- Ensure you have in your app files in GitHub dependencies in the form of a requirements.txt file, and a Procfile with the following: 
+    - release: python manage.py migrate 
+    - web: gunicorn busex.wsgi:application
 - In Heroku, in your app and under the 'deploy' tab, choose the GitHub deployment method. In the app connected to GitHub section find and select the app you wish to deploy. 
 - Choose either automatic or manual deploys. In whichever you choose, select the branch in the GitHub repository you wish to deploy. 
 
 
 Final deployed site is here: *heroku site*
 
-To run locally, create a new workspace in your local computer. Use $ git clone https://github.com/SammyDartnall10/alt_work.git to create a local copy of the code. 
-Install requirements with $ pip3 install -r requirements.txt
-Run the app with $ python3 app.py
+
 
 
 # Credits
