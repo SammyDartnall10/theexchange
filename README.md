@@ -53,8 +53,9 @@ Stripe payments are collected upon registering, setup up and managed using the S
 
 # Features
 
-Features deployed, and to be deployed are summarised in the following table
-<img src="readme_static/Deployment.png">
+Features deployed, and to be deployed are summarised in the following table and sections
+
+![Features](/media/readme_static/Features.png)
 
 ### High level project purpose
 
@@ -96,7 +97,8 @@ Design of the database is made up of five main tables.
 - Reviews: Many Users can make Many reviews about companies. To ensure a Many to One Relationship, the Review table bridges between Users and Companies. 
 - Upvotes: Many Users can make Many upvotes. The Upvotes table collects the upvotes a user has made. The Lisitng and User models can then pull from this table as needed, eg to count number of listings.
 
-A diagramatic representation of this schema is below: 
+A diagramatic representation of this schema is below:   
+*(Please note, the var/int are not representions of the final model property types - diagram was made to help me visualse and represent relationships between tables)*
 
 ![Datebase](/media/readme_static/DB.png)
 
@@ -120,7 +122,8 @@ A responsive navigation menu is at the top of each page, and makes use of bootst
 
 #### Use of JavaScript:
 Javascript has been used in the form of modals - not requiring the user to leave the page to leave a reveiw.
-Ajax has been used in the exchange page so that the page does not need to be refreshed upon a user upvoting a listing
+Ajax has been used in the exchange page so that the page will refresh and update the upvotes count to the correct amount. 
+Mouseover events on the index.html page, create interest and engagement
 
 #### Documentation:
 This README.md file is the means by which the project is explained - how it works and what its value is.
@@ -155,9 +158,8 @@ Users can search for other companies based on company name, location or main bus
 
 - In-app messaging - at the moment contact is done through providing an email for people to contact. A potential development could be to create a means for users to send messages, live or not within the app, increasing engagement with the app. 
 
-- Standard means for sending propoals - similar to other freelancer sites. Send this to a table, whereit is stored in our database. With this information comparisons on proposals can be made by the user. Once a larger set of data is collected data analysis can also show what products are being swapped for what, which are the most popular products and services are being asked for and offered, among other insights. 
+- Standard means for sending propoals - similar to other freelancer sites. All proposals could be sent to a table, and stored in our database. With this information comparisons on proposals can be made by the user. It could also provide an audit trail, and useful tool for mediating issues between users. Once a larger set of data is collected, data analysis can also show what products are being swapped for what, which are the most popular products and services are being asked for and offered, among other insights. 
 
-- Sending 'karma' to other user as either a thanks, or in a much later version of the app, to make up the difference in a swap. Users can also be given karma in return for products and services - this karma can be used at a later date to make up the difference in exchanges. 
 
 
 # Testing
