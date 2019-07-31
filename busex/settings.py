@@ -24,7 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
 ALLOWED_HOSTS = ['busex-sammydartnall.c9users.io',
-    'b22ab85531ce460b901e75ccec3adfad.vfs.cloud9.us-east-1.amazonaws.com']
+    'b22ab85531ce460b901e75ccec3adfad.vfs.cloud9.us-east-1.amazonaws.com',
+    'businessexchange.herokuapp.com']
 
 # Application definition
 
