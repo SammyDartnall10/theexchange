@@ -2,8 +2,35 @@ from django.db import models
 from django.contrib.auth.models import User
 from company.models import CompanyDetail
 from django.db.models import Count
+#from votes.managers import VotableManager
 
 # Create your models here.
+#class Recommendation(models.Model):
+#    topic = models.ForeignKey(Topic)
+#    user = models.ForeignKey(User)
+#    title = models.CharField(max_length=300)
+#    votes = VotableManager()
+
+#    def get_total_votes(self):
+#        total = self.votes.count()
+#        return int(total)
+
+#class ListingTest(models.Model):
+#    id = models.AutoField(primary_key=True)
+#    title = models.CharField(max_length=254, default="Listing Title")
+#    content = models.TextField("What are you looking for? Be as detailed as possible!")
+#    image = models.ImageField(upload_to='images', null=False)
+#    contact = models.EmailField(default="The best email for people to contact you at")
+#    tag = models.TextField()
+#    can_offer = models.TextField(default="Please detail the things you can offer in return as single words, eg catering, photography")
+#    created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
+#    votes = VotableManager()
+#    def get_total_votes(self):
+#        total = self.votes.count()
+#        return int(total)
+#    
+#    def __str__(self):
+#        return self.title
         
 class Listing(models.Model):
     id = models.AutoField(primary_key=True)
@@ -14,7 +41,7 @@ class Listing(models.Model):
     tag = models.TextField()
     can_offer = models.TextField(default="Please detail the things you can offer in return as single words, eg catering, photography")
     created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
-    #total_upvotes = models.ForeignKey(ANewTable, related_name="upvotes")
+    count = models.IntegerField(default=0)
     @property
     def upvotes(self):
         count_upvotes = self.upvotes_set.all()

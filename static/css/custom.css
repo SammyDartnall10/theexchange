@@ -38,6 +38,15 @@ p {
     font-family: 'Open Sans', sans-serif;
 }
 
+.intext{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+.mission{
+    margin-top: 50px;
+}
 /*--------- Giving elements a bit of breathing space------------*/
 
 body { 

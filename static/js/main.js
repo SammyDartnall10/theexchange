@@ -1,7 +1,17 @@
-
+$(document).on("click", ".NEWupvotes", function(){
+    console.log('my message');
+    var recommendationid = $(this).attr("data-recommendation");
+    $.post('/upvote/', {recommendation_id: recommendationid}, function(data){
+            console.log('my message1');
+            $('#vote_count').html(data);
+            $('#upvotes').hide();
+    });
+    
+});
 
 
 function upvote(e){
+    
     var pk = $(e).attr('id');
         
             console.log("upvoting");
@@ -13,16 +23,16 @@ function upvote(e){
                 data: { pk: pk },
                 success: function(response){
                    console.log(response);
-                   document.location.href = 'exchange';
-                   document.getElementById(pk).scrollIntoView();
                             }
                 });
-                    
+                
+                   
         
 }
            
            
 function downvote(e){
+    
     var pk = $(e).attr('id');
     
             console.log("it must be red, so turn it black");
@@ -34,11 +44,9 @@ function downvote(e){
                 data: { pk: pk },
                 success: function (response){
                    console.log(response);
-                   document.location.href = 'exchange';
-                   document.getElementById(pk).scrollIntoView();
                         }
             });
-        
+       
     }
 
 /*---------Places API - Google------------------------------------------------*/

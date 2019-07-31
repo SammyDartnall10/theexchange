@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from .models import Listing, Upvotes
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count, F
 
 
 # Create your views here.
@@ -33,14 +33,11 @@ def get_listings(request):
    
     user = request.user
     upvoted = Upvotes.objects.filter(voter = user).values_list('listing_upvoted', flat=True) #list to check to see if listing has been liked by user
-   
-    listings = Listing.objects.all()
-    #listings = Listing.objects.all().order_by('upvotes')
-    #listings = Listing.objects.distinct('title').order_by('upvotes')
+    listings = Listing.objects.all().order_by('-count')
     
-    #listings = Listing.objects.annotate(count=Count('upvotes_set__id')).order_by('count')
-                
-                
+    #listings = Listing.objects.all()
+    #listings = Listing.objects.distinct('title').order_by('upvotes')
+    #listings = Listing.objects.annotate(count=Count('upvotes_set__id')).order_by('count')  
     #listings = Listing.objects.values('title').distinct().order_by('upvotes') 
     print (listings)
           
@@ -99,11 +96,16 @@ def upvote(request):
     print("got as far as  the upvote view")
     pk = request.POST['pk']
     listing = get_object_or_404(Listing, pk=pk)
+    
+    listing.count = listing.count + 1
+    listing.save()
+    
     voter = request.user
     upvote_instance = Upvotes.objects.create(voter=voter, listing_upvoted=listing)
     
-    return render(request, 'exchange.html')
+    return HttpResponse(listing)
      
+    
 
 @csrf_exempt
 def downvote(request):
@@ -111,8 +113,12 @@ def downvote(request):
     
     pk = request.POST['pk']
     listing = get_object_or_404(Listing, pk=pk)
+    
+    listing.count = listing.count - 1
+    listing.save()
+    
     voter = request.user
     downvote_instance = Upvotes.objects.filter(voter=voter, listing_upvoted=listing).delete()
     
-    return render(request, 'exchange.html')
+    return HttpResponse(listing)
 

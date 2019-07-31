@@ -1,23 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1> What does "Ex:Change" even mean? </h1>
-<h5>Ex:Change :</h5>
-<p>1. Ex: a prefix meaning “out of,” “from,” and hence “utterly,” “thoroughly,” and sometimes meaning “not” or “without” or indicating a former title, status, etc.; freely used as an English formative: exstipulate; exterritorial; ex-president</p>
-
-<p>2. Change: verb (used with object), changed, chang·ing.
-to make the form, nature, content, future course, etc., of (something) different from what it is or from what it would be if left alone:
-to change one's name;
-to change one's opinion;
-to change the course of history.</p>
-
-<p>Or: noun, change.
-coins as opposed to paper currency.
-"a handful of loose change"</p>
-
-<p>Together, we've combined these defintions to give us our mission statement - "changing the future course of small business without 'money'"</p>
-<h1> Thats great.. So how does it work...? </h1>
-
-<img src="{{ MEDIA_URL }} xx">
-
+<div class="row">
+    <div class="col-12 text-center">
+        <h1> What does "Ex:Change" even mean? </h1>
+    </div>
+    <div class="col-12 ">
+        <h5>Ex:Change :</h5>
+        <p>1. Ex: a prefix meaning “out of,” “from,” and hence “utterly,” “thoroughly,” and sometimes meaning “not” or <span class="intext">“without”</span> or indicating a former title, status, etc.; freely used as an English formative: exstipulate; exterritorial; ex-president</p>
+        
+        <p>2. Change: verb (used with object), changed, chang·ing.
+        to make the form, nature, content, <span class="intext">future course</span>, etc., of (something) different from what it is or from what it would be if left alone:
+        to change one's name;
+        to change one's opinion;
+        to change the course of history.</p>
+        
+        <p>Or: noun, change.
+        coins as opposed to paper <span class="intext">currency</span>.
+        "a handful of loose change"</p>
+    </div>  
+    <div class="col-12"> 
+        <p class="mission">Together, we've combined these defintions to give us our mission statement:
+        <br>
+    </div>
+    <div class="col-12 text-center">
+        <span class="intext">"changing the future course of small business without 'money'"</span></p>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <h1> Thats great.. So how does it work...? </h1>
+        
+        <img src="{{ MEDIA_URL }} xx">
+    </div>
+</div>
 {% endblock %}

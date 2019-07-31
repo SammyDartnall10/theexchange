@@ -27,6 +27,8 @@ from django.views.static import serve
 from django.conf import settings
 from .settings import MEDIAFILES_LOCATION
 
+#from votes import urls as urls_votes
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +38,8 @@ urlpatterns = [
     path('listing/', include('listing.urls')),
     path('company/', include('company.urls')),
     path('media/<path:path>', serve, {'document_root': settings.MEDIAFILES_LOCATION }),
+    #path('', include('votes.urls'))
 ]
+
 
 #then pull through the views and use the urls to call the functions - that then renders the template
