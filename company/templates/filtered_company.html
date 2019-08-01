@@ -24,19 +24,20 @@
 </div>
 </div>
 
-  
+<div class="col-md-6"> 
   {% for company in companies %}
-  <div class="col-md-6">
-    <div class="card">
+  <div>
+    <div class="card mb-3">
       <div class="card-body">
-          
         <a href="{% url 'company_search' company.business_name %}"><h3 class="card-title">{{ company.business_name }}</h3></a>
+        <span><p>{{ company.city }}</p></span>
       </div>
       <div class="card-footer">
       </div>
   </div>
   </div>
   {% endfor %}
+  </div>
 </div>
 
 

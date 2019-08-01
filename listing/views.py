@@ -18,7 +18,7 @@ def filtered_listings(request):
     if request.method =="POST":
         search_criteria = request.POST.get('search-listings')
         print(search_criteria)
-        listings = Listing.objects.filter(tag__contains=search_criteria)
+        listings = Listing.objects.filter(content__contains=search_criteria)
         print(listings)
         return render(request, "filtered_results.html", {'listings': listings})
     else:

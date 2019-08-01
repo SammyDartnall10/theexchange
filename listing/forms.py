@@ -15,6 +15,6 @@ class ImageUploadForm(forms.Form):
 class NewListing(forms.ModelForm):
     class Meta:
         model = Listing
-        exclude = ['created_by']
+        exclude = ['created_by', 'count', 'tag']
         # exclude user from here so it doesnt come through as a field to be filled in in the html
         

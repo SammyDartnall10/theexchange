@@ -34,12 +34,12 @@ from django.db.models import Count
         
 class Listing(models.Model):
     id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=254, default="Listing Title")
+    title = models.CharField("Listing Title.. As it sounds.. what are you looking for?", max_length=254, default= "Web Design, Photography, Cake, Puppies.. (we can dream)")
     content = models.TextField("What are you looking for? Be as detailed as possible!")
     image = models.ImageField(upload_to='images', null=False)
     contact = models.EmailField(default="The best email for people to contact you at")
-    tag = models.TextField()
-    can_offer = models.TextField(default="Please detail the things you can offer in return as single words, eg catering, photography")
+    tag = models.TextField("Keyword")
+    can_offer = models.TextField("What are all the really awesome things you can offer in return? Enter as single words or a statement", default="Use keywords, such as photography, graphic design, carpentry, dog sitting... ")
     created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
     count = models.IntegerField(default=0)
     @property

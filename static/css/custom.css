@@ -47,6 +47,12 @@ p {
 .mission{
     margin-top: 50px;
 }
+
+.smallprint{
+    font-size: 15px;
+}
+
+
 /*--------- Giving elements a bit of breathing space------------*/
 
 body { 
@@ -66,7 +72,9 @@ form {
     margin-bottom:20px;
 }
 
-
+.space-top{
+    margin-top: 60px;
+}
 /*--------- Overwrite bootsrap and text decoration------------*/
 a{
     text-decoration:none !important;
@@ -129,7 +137,7 @@ a{
 
 
 .panel{
-    background-color: #e6ffff;
+    background-color: #FAF8FF;
       padding: 30px; 
       border-radius: 5px;
 }

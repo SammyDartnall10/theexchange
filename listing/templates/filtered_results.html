@@ -24,14 +24,13 @@
 </div>
 </div>
  
-<div class="col"> 
+<div class="col-md-6"> 
   {% for listing in listings %}
-  <div class="col">
+  <div class="col mb-3 ">
     <div class="card">
-      <img class="card-img-top" src="{{ MEDIA_URL }}{{ listing.image }}" alt="Card image cap">
+      
       <div class="card-body">
         <a href="{% url 'view_listing' listing.id %}"><h3 class="card-title">{{ listing.title }}</h3></a>
-        
         <p class="card-text">{{ listing.content|truncatewords:20 }}</p>
       </div>
       <div class="card-footer">
