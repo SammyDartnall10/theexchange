@@ -67,7 +67,7 @@
       </div>
       <div class="card-footer">
         {% if listing.id in upvoted %}
-        <span href="{{ listing.id }}"><i id="{{ listing.id }}" onclick="downvote(this)" class="fas fa-heart upvote{{ listing.id }}" style="color:red" name="{{ listing.id }}_red" ></i></span><span class="float-right"><p class="upvotecount{{ listing.id }}">Upvotes: {{ listing.upvotes }}</p> </span>
+        <span href="{{ listing.id }}"><i id="{{ listing.id }}" onclick="downvote(this)" class="fas fa-heart upvote{{ listing.id }}" style="color:red" name="{{ listing.id }}_red" ></i></span><span class="float-right"><p id="upvotecount{{ listing.id }}">Upvotes: {{ listing.upvotes }}</p> </span>
         {% else %}
         <span href="{{ listing.id }}"><i id="{{ listing.id }}" onclick="upvote(this)"class="fas fa-heart upvote{{ listing.id }}" style="color:black" name="{{ listing.id }}_black" ></i></span><span class="float-right"><p id="upvotecount{{ listing.id }}">Upvotes: {{ listing.upvotes }}</p> </span>
         {% endif %}

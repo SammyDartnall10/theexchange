@@ -117,6 +117,7 @@ def downvote(request):
     
     listing.count = listing.count - 1
     listing.save()
+    print("count is")
     print(listing.count)
     
     voter = request.user

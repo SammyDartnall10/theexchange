@@ -38,7 +38,6 @@ class Listing(models.Model):
     content = models.TextField("What are you looking for? Be as detailed as possible!")
     image = models.ImageField("Pro tip: Square-ish pics work best.. we wont crop your photos to suit a set window, but that does mean rectangles come out looking a bit funny!", upload_to='images', null=False)
     contact = models.EmailField(default="The best email for people to contact you at")
-    tag = models.TextField("Keyword")
     can_offer = models.TextField("What are all the really awesome things you can offer in return? Enter as single words or a statement", default="Use keywords, such as photography, graphic design, carpentry, dog sitting... ")
     created_by = models.ForeignKey(User, null=False, default=1, on_delete=models.SET_DEFAULT)
     count = models.IntegerField(default=0)

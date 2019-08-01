@@ -1,6 +1,5 @@
 
 
-
 function upvote(e){
     
     var pk = $(e).attr('id');
@@ -14,10 +13,11 @@ function upvote(e){
                 url: "upvote",
                 data: { pk: pk },
                 success: function(response){
-                    console.log("helloooooo")
-                    console.log(`Upvotes is: ${count}`);
+                    console.log("helloooooo");
                     var count = response;
+                    console.log(`Upvotes is: ${count}`);
                     document.getElementById(`upvotecount${pk}`).innerHTML = `Upvotes: ${count}`;
+                    document.getElementById(pk).onclick = "downvote(this)";
                   
                             }
                 });
@@ -36,10 +36,11 @@ function downvote(e){
                 url: "downvote",
                 data: { pk: pk },
                 success: function (response){
-                    console.log("downvote response")
-                    console.log(`Upvotes is: ${count}`);
+                    console.log("downvote response");
                     var count = response;
+                    console.log(`Upvotes is: ${count}`);
                     document.getElementById(`upvotecount${pk}`).innerHTML = `Upvotes: ${count}`;
+                    document.getElementById(pk).onclick = "upvote(this)";
                         }
             });
        
