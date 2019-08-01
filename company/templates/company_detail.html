@@ -28,20 +28,21 @@
                 <p>{{ value }}</p>
                 {% endfor %}
             </div>
+            <div>
+                <h5>Primary Industry:</h5> <p>{{ company.industry }}</p>
+            </div>
 
         </div>
 <!-------Right side panel------------------------------------------------------------------------------------------------------------------->
      
         <div class="col-md-6">
-            <div class="col" id="map"></div>
-            <div class="col-md-6">
+            <div id="map"></div>
+            <div>
                 <h5>Registered Business Address:</h5> 
                 <p id="companyCity">{{ company.city }}</p>
                 <p>{{ company.country }}</p>
             </div>
-            <div class="col-md-6">
-                <h5>Primary Industry:</h5> <p>{{ company.industry }}</p>
-            </div>
+            
         </div>
         
 <!--------edit buttons----------------------------------------------------------------------------------------------------------------->

@@ -36,7 +36,7 @@ class Listing(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField("Listing Title.. As it sounds.. what are you looking for?", max_length=254, default= "Web Design, Photography, Cake, Puppies.. (we can dream)")
     content = models.TextField("What are you looking for? Be as detailed as possible!")
-    image = models.ImageField(upload_to='images', null=False)
+    image = models.ImageField("Pro tip: Square-ish pics work best.. we wont crop your photos to suit a set window, but that does mean rectangles come out looking a bit funny!", upload_to='images', null=False)
     contact = models.EmailField(default="The best email for people to contact you at")
     tag = models.TextField("Keyword")
     can_offer = models.TextField("What are all the really awesome things you can offer in return? Enter as single words or a statement", default="Use keywords, such as photography, graphic design, carpentry, dog sitting... ")

@@ -31,8 +31,8 @@
         {% endif %}
 
 <div class="row panel">
-<!------Left side panel---------------------------------------------------------------------------------------------------------------------->
-        
+ <!------Name - Personal and Business---------------------------------------------------------------------------------------------------------------------->
+       
         <div class="col-12">
             <div>
                 <span><h3>{{ company.business_name }}</h3></span>
@@ -41,6 +41,8 @@
                 <span><p>{{ company.contact_email }}</p></span>
             </div>
         </div>
+<!------Left side panel---------------------------------------------------------------------------------------------------------------------->
+
         <div class="col-md-6">
             <div>
                 <img class="profile_image resize" src="{{ MEDIA_URL }}{{ company.logo }}" alt="Company Logo">
@@ -56,21 +58,22 @@
                 <p>{{ value }}</p>
                 {% endfor %}
             </div>
+            <div>
+                <h5>Primary Industry:</h5> <p>{{ company.industry }}</p>
+            </div>
 
         </div>
     
 <!-------Right side panel------------------------------------------------------------------------------------------------------------------->
      
         <div class="col-md-6">
-            <div class="col" id="map"></div>
-            <div class="col-md-6" >
+            <div  id="map"></div>
+            <div >
                 <h5>Registered Business Address:</h5> 
                 <p id="companyCity">{{ company.city }}</p>
                 <p>{{ company.country }}</p>
             </div>
-            <div class="col-md-6">
-                <h5>Primary Industry:</h5> <p>{{ company.industry }}</p>
-            </div>
+            
         </div>
         
 </div>        
@@ -121,7 +124,7 @@
 <h5>Recent Reviews</h5>
 
 {% for review in reviews %}
-  <div class="col">
+  <div>
         <h6>{{ review.created_by }}</h6>
         <p>{{ review.content|truncatewords:20 }}</p>
   </div>

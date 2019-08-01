@@ -73,8 +73,14 @@ form {
 }
 
 .space-top{
-    margin-top: 60px;
+    margin-top: 40px;
 }
+
+.space-below{
+    margin-bottom: 40px;
+}
+
+
 /*--------- Overwrite bootsrap and text decoration------------*/
 a{
     text-decoration:none !important;
