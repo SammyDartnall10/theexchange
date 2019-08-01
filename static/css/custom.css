@@ -155,6 +155,10 @@ a{
     margin-right: -20px;
 }
 
+.viewheight{
+     height: 30vh   
+}
+
 /*-----------------------------------------------------*/
 
 /*----------Company form submitted at same time as registering - triggers a new company entry in database. 

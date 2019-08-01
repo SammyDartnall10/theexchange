@@ -55,7 +55,7 @@
                 <h5>Overall Rating:</h5> 
                 
                 {% for key, value in company.average_review.items %}
-                <p>{{ value }}</p>
+                <p>{{ value|floatformat:1 }}</p>
                 {% endfor %}
             </div>
             <div>

@@ -29,7 +29,7 @@ def edit_company(request, pk):
             form = CompanyDetailForm(request.POST, request.FILES, instance=company)
             if form.is_valid():
                 company = form.save()
-                return redirect('/')        
+                return redirect('profile')        
         else:
             form = CompanyDetailForm(instance=company)
     else: 
@@ -38,13 +38,6 @@ def edit_company(request, pk):
     return render(request, 'edit_company.html', {'form': form})
     #rendering the createnew file as its the same- wil display the info already saved and then save over with the edits. Linked in URLs
     
-def company_detail(request, pk):
-    """
-    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
-    Or return a 404 error if the post is not found
-    """
-    company = get_object_or_404(CompanyDetail, pk=pk)
-    return render(request, "company_detail.html", {'company': company})
 
 def filtered_company(request):
     """
@@ -59,6 +52,15 @@ def filtered_company(request):
         
         #TODO add display on average rating in list.. 
 
+def company_detail(request, pk):
+    """
+    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
+    Or return a 404 error if the post is not found
+    """
+    company = get_object_or_404(CompanyDetail, pk=pk)
+    company_form = CompanyReviewForm(request.POST, request.FILES)
+    reviews = CompanyReview.objects.filter(company_reviewed = company)
+    return render(request, "company_detail.html", {'company': company, 'company_form': company_form, 'reviews': reviews})
     
 def company_search(request, company_name):
     """
@@ -68,11 +70,6 @@ def company_search(request, company_name):
     company = CompanyDetail.objects.get(business_name__contains=company_name)
     company_form = CompanyReviewForm(request.POST, request.FILES)
     reviews = CompanyReview.objects.filter(company_reviewed = company)
-    #avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
-    
-    print(company)
-    #print(avg_rating)
-    #print(type(avg_rating))
     
     return render(request, "view_company.html", {'company': company, 'company_form': company_form, 'reviews': reviews})
     
