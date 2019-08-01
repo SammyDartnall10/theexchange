@@ -15,8 +15,9 @@
 
 
 {% endblock head_js%}
-
+{% load bootstrap %}
 {% block content %}
+
 <div class="row">
     <div class="col-12">
         <h4>New User SignUp</h4>
@@ -53,18 +54,18 @@
         </div>
         
         <div class="form-group company_form">
-            {{ company_form.as_p }}
+            {{ company_form|bootstrap }}
         </div>
     
         <div class="form-group">
-            {{ registration_form.as_p }}
+            {{ registration_form|bootstrap }}
         </div>
     </div>
     <div class="col-md-1"></div>
     <div class="col-md-5 panel">
         <legend>Secure Payment Form</legend>
         <div class="form-group">
-            {{ payment_form.as_p }}
+            {{ payment_form|bootstrap }}
         </div>
         {% csrf_token %}
         <div class="form-group button-spacing">
