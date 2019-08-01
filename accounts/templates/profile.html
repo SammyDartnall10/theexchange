@@ -5,7 +5,8 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------->
 
 <div class="row">
-    <div class="col-sm-4 panel border-right border-dark">
+    <div class="col-sm-4 panel border-right ">
+        <div class="row border-bottom">
         <div>
             <h2> Hi {{ user.first_name }}!</h2> 
         </div>
@@ -13,10 +14,7 @@
             <p>Edit your personal or company details below, or add and manage your business listings in the "My Listings" section</p>
         </div>
         
-        
-        
         <div>
-            
             <div>
                 <form role="form" method="POST" id="edit_profile" action="{% url 'edit_profile' profile.id %}">
                     {% csrf_token %}
@@ -33,18 +31,20 @@
                 </form>
             </div>
         </div>
-        <div>
-        <div>
-            <h2>See what others are saying about you:</h2>
-            <h5>Overall Rating:</h5>
-            
-            {% for key, value in avg_rating.items %}
-            <p>{{ value }}</p>
-            {% endfor %}    
         </div>
+        <div class="row  ">
         <div>
-            <h5>Recent Reviews</h5>
-        </div>
+            <div>
+                <h2>See what others are saying about you:</h2>
+                <h5>Overall Rating:</h5>
+                
+                {% for key, value in avg_rating.items %}
+                <p>{{ value }}</p>
+                {% endfor %}    
+            </div>
+            <div>
+                <h5>Recent Reviews</h5>
+            </div>
         </div>
             {% for review in reviews %}
               <div class="col">
@@ -55,7 +55,7 @@
                     <h1></h1>
               </div>
              {% endfor %}
-        
+        </div>
     </div>
 <!---------------------------------------------------------------------------------------------------------------------------------------->
     

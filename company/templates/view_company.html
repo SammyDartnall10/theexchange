@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {% load bootstrap %}
 {% block content %}
-<div id="form-content">
-    <form action="{% url 'filtered_company' %}" method="POST">
-        {% csrf_token %}
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <label for="searchCompany">Search for a business</label>
-            <input name="search-company" type="text">
-            <input type="submit" id='submit' class='btn btn-dark type-search' value="Search" />
+<div class="row border-bottom">
+    <div class="col">
+        <div id="form-content">
+            <form action="{% url 'filtered_company' %}" method="POST">
+                {% csrf_token %}
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="searchCompany">Search for a business</label>
+                    <input name="search-company" type="text">
+                    <input type="submit" id='submit' class='btn btn-dark type-search' value="Search" />
+                </div>
+              </div>
+            </form>
         </div>
-      </div>
-    </form>
+    </div>
 </div>
-
  <!-- Successful review added message -->
     <div>
         {% if messages %}
@@ -78,8 +81,9 @@
         
 </div>        
         
-        
-<div class="row">
+<!-------Add review------------------------------------------------------------------------------------------------------------------->
+
+<div class="row border-top ">
     <div class="col-md-6 button-spacing">
         
         <!-- Button trigger modal -->
@@ -120,15 +124,15 @@
 
 
 
-<div class="col-md-6">
-<h5>Recent Reviews</h5>
-
-{% for review in reviews %}
-  <div>
-        <h6>{{ review.created_by }}</h6>
-        <p>{{ review.content|truncatewords:20 }}</p>
-  </div>
-  {% endfor %}
-</div>
+        <div class="col-md-6">
+        <h5>Recent Reviews</h5>
+        
+        {% for review in reviews %}
+          <div>
+                <h6>{{ review.created_by }}</h6>
+                <p>{{ review.content|truncatewords:20 }}</p>
+          </div>
+          {% endfor %}
+        </div>
 </div>
 {% endblock %}

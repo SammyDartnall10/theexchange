@@ -1,13 +1,4 @@
-$(document).on("click", ".NEWupvotes", function(){
-    console.log('my message');
-    var recommendationid = $(this).attr("data-recommendation");
-    $.post('/upvote/', {recommendation_id: recommendationid}, function(data){
-            console.log('my message1');
-            $('#vote_count').html(data);
-            $('#upvotes').hide();
-    });
-    
-});
+
 
 
 function upvote(e){
@@ -16,18 +7,20 @@ function upvote(e){
         
             console.log("upvoting");
             console.log(document.getElementById(pk));
+            console.log("its black - turn it red");
             document.getElementById(pk).style = "color: red";
             $.ajax({
                 type: "POST",
                 url: "upvote",
                 data: { pk: pk },
                 success: function(response){
-                   console.log(response);
+                    console.log("helloooooo")
+                    console.log(`Upvotes is: ${count}`);
+                    var count = response;
+                    document.getElementById(`upvotecount${pk}`).innerHTML = `Upvotes: ${count}`;
+                  
                             }
                 });
-                
-                   
-        
 }
            
            
@@ -43,7 +36,10 @@ function downvote(e){
                 url: "downvote",
                 data: { pk: pk },
                 success: function (response){
-                   console.log(response);
+                    console.log("downvote response")
+                    console.log(`Upvotes is: ${count}`);
+                    var count = response;
+                    document.getElementById(`upvotecount${pk}`).innerHTML = `Upvotes: ${count}`;
                         }
             });
        

@@ -99,11 +99,12 @@ def upvote(request):
     
     listing.count = listing.count + 1
     listing.save()
+    print(listing.count)
     
     voter = request.user
     upvote_instance = Upvotes.objects.create(voter=voter, listing_upvoted=listing)
     
-    return HttpResponse(listing)
+    return HttpResponse(listing.count)
      
     
 
@@ -116,9 +117,10 @@ def downvote(request):
     
     listing.count = listing.count - 1
     listing.save()
+    print(listing.count)
     
     voter = request.user
     downvote_instance = Upvotes.objects.filter(voter=voter, listing_upvoted=listing).delete()
     
-    return HttpResponse(listing)
+    return HttpResponse(listing.count)
 
