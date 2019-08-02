@@ -34,15 +34,15 @@ The functional specifications driven by these use cases are as follows:
 - Ranking of "whats popular" of all listings
 
 
-### Wireframes and Functional flows:
+## Wireframes and Functional flows:
 
-### Functional Flows:
+## Functional Flows:
 ![Flow](/media/readme_static/LAYOUT.png)
 
-#### Desktop:
+## Desktop Wireframes:
 ![WebLayout](/media/readme_static/TheExChange.png)
 
-#### Mobile:
+## Mobile Wireframes:
 ![Mobile](/media/readme_static/TheExChange_Mobile.png)
 
 # Technologies Used
@@ -193,8 +193,9 @@ The following testing structure was used:
 ![TestingThree](/media/readme_static/ManualTestingThree.png)
 
 ### Bugs and Problems
-One issue not resolved in the submission for this project is the management of image files. MongoDB is not intended to store image files, so I initially searched for other means to store and access images.
-Packages in Node.js, or perhaps online hosting were options, but out of the scope of this particular project. 
+One final issue I couldn't work out was how to handle the last step of upvoting. On the inital click the vote will increase or decrease as expected, however, if clicked again nothing happens until you refresh the page.  
+
+Another issue was how to display and rank the listings, based on upvotes (highest to lowest). Initially, I was ranking them based on the upvotes @property (see Listings/models.py), but this would result in duplication of results. As it turns out this is to do with how the database is queried - because the upvotes property is a function, SQL doesnt quite know what to do with it, and so (as I understand it) kind of loops through it (my huge thanks to my mentor Aaron Sinnott for helping me understand this - I was at a loss as to why that behaviour was occuring till we had our call!). So, even though I knew the cause of the problem, I am still struggling to find a soloution to it. I have created a work around for now by creating an integer field (the count feild) that increases or decreases when the button clicked/ajax call made. Not as robust as basing ranking on the upvotes property, but works for the purposes of displaying funcitonality.  
 
 
 # Deployment
