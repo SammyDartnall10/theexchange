@@ -60,11 +60,3 @@
     
 {% endblock %}
 
-
- industry = models.CharField(max_length=254, null=True, choices=INDUSTRY, default="Please pick an industry", blank=True)
-    contact_email = models.EmailField(default="email@email.com", null=True, blank=True)
-    about_us = models.CharField(max_length=254, null=True, default="Information about your company - where you're from, what you do!", blank=True)
-    address = models.CharField(max_length=254, null=True, default="Business Address", blank=True)
-    logo = models.ImageField(upload_to='images', null=True, blank=True)
-    created_by = models.ForeignKey(User, null=True, default=1, on_delete=models.SET_DEFAULT)
-    overall_rating

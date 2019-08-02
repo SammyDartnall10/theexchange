@@ -22,7 +22,7 @@ def filtered_listings(request):
         print(listings)
         return render(request, "filtered_results.html", {'listings': listings})
     else:
-        return HttpResponse("Sorry, we appear to be having a slight issue at the moment - please try again")
+        return render(request, "error.html")
         
 
 @login_required    
