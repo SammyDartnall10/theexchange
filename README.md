@@ -27,16 +27,23 @@ The following Use Cases summarise the four main groups of users that would use t
 ![UserStories](/media/readme_static/UserStoriesCropped.png)
 
 The functional specifications driven by these use cases are as follows:
-
+- Make listings to detail what you are looking for, and what you can offer in return 
+- Search functionality to look for listings you respond to 
+- Ability to leave reviews on companies
+- Search funcitonality to look for other comapnies 
+- Ranking of "whats popular" of all listings
 
 
 ### Wireframes and Functional flows:
 
+### Functional Flows:
+![Flow](/media/readme_static/LAYOUT.png)
+
 #### Desktop:
-<img src="readme_static/Layout.png">
+![WebLayout](/media/readme_static/TheExChange.png)
 
 #### Mobile:
-<img src="readme_static/Layout_Mobile.png">
+![Mobile](/media/readme_static/TheExChange_Mobile.png)
 
 # Technologies Used
 
@@ -181,8 +188,9 @@ To make sure each of the CRUD operations could be carried out on different devic
 
 The following testing structure was used: 
 
-*TODO: make testing flows*
-*TODO: python testing*
+![TestingOne](/media/readme_static/ManualTestingOne.png)
+![TestingTwo](/media/readme_static/ManualTestingTwo.png)
+![TestingThree](/media/readme_static/ManualTestingThree.png)
 
 ### Bugs and Problems
 One issue not resolved in the submission for this project is the management of image files. MongoDB is not intended to store image files, so I initially searched for other means to store and access images.
