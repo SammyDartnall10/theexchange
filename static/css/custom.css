@@ -39,9 +39,7 @@ p {
 }
 
 .intext{
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: bolder;
-    font-size: 30px;
+    color: purple;
 }
 
 .mission{
