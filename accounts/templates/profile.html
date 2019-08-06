@@ -4,6 +4,18 @@
 {% block content %}
 <!---------------------------------------------------------------------------------------------------------------------------------------->
 
+{% if messages %}
+            <br><br><br>
+            <div class="alert alert-success">
+                <div class="messages">
+        
+                    {% for message in messages %} 
+                        {{ message }} 
+                    {% endfor %}
+                </div>
+            </div>
+  {% endif %}
+
 <div class="row">
     <div class="col-sm-4 panel border-right ">
         <div class="row border-bottom">
@@ -11,7 +23,7 @@
             <h2> Hi {{ user.first_name }}!</h2> 
         </div>
         <div>
-            <p>Edit your personal or company details below, or add and manage your business listings in the "My Listings" section</p>
+            <p>Edit your personal or company details here (below). On the right you can add and manage your business listings in the "My Listings" section, or see all the Listings in the Exchange </p>
         </div>
         
         <div>
@@ -61,6 +73,13 @@
     
     <div class="col-sm-8 listingspanel">
         <div class="row ">
+            <h1> See all Listings in the Exchange: </h1>
+        </div>
+        <div class=" row card-spacing">
+            <a href="{% url 'exchange' %}" class="btn btn-outline-dark" role="button">See the Exchange</a>
+
+        </div>
+        <div class="row border-top ">
             <h1> My Listings </h1>
         </div>
         <div class=" row card-spacing">

@@ -35,11 +35,16 @@
     </div>
  <!-----------------Edit Listing Links---------------------------------------------------->   
 
-<div class="col-12">
-        <a href="{% url 'profile' %}" class="btn btn-default">Back to Profile</a>
-        <a href="{% url 'edit_listing' listing.id %}" class="btn btn-default">Edit Details</a>
-        <hr>
-</div>   
     
+<!--------edit buttons----------------------------------------------------------------------------------------------------------------->
+    <div class="row justify-content-center button-spacing">   
+        <div class="col">
+            <div>
+                <a href="{% url 'profile' %}" class="btn btn-outline-dark" role="button">Back to Profile</a>
+                <a href="{% url 'edit_listing' listing.id %}" class="btn btn btn-outline-dark" role="button">Edit or Delete Listing </a>
+            </div> 
+        </div> 
+    </div>
+
 {% endblock %}
 

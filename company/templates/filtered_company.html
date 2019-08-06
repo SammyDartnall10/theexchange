@@ -25,6 +25,18 @@
 </div>
 
 <div class="col-md-6"> 
+{% if messages %}
+            <br><br><br>
+            <div class="alert alert-success">
+                <div class="messages">
+        
+                    {% for message in messages %} 
+                        {{ message }} 
+                    {% endfor %}
+                </div>
+            </div>
+  {% endif %}
+
   {% for company in companies %}
   <div>
     <div class="card mb-3">

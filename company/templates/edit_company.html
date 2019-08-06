@@ -8,7 +8,9 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
     {{ form|bootstrap }}
-    <button type="submit" class="btn btn-info">Save</button>
+    <button type="submit" class="btn btn-outline-dark">Save</button>
+    <a class="btn btn-outline-dark" href="{% url 'profile' %}" role="button">Go Back</a>
+    
 </form>
 </div>
 

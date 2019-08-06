@@ -7,6 +7,7 @@ from .models import Listing, Upvotes
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, F
+from django.contrib import auth, messages
 
 
 # Create your views here.
@@ -18,9 +19,14 @@ def filtered_listings(request):
     if request.method =="POST":
         search_criteria = request.POST.get('search-listings')
         print(search_criteria)
-        listings = Listing.objects.filter(content__contains=search_criteria)
-        print(listings)
-        return render(request, "filtered_results.html", {'listings': listings})
+        listings = Listing.objects.filter(content__icontains=search_criteria)
+        if listings:
+            print(listings)
+            return render(request, "filtered_results.html", {'listings': listings})
+        else :
+            messages.success(request, "Sorry, no matching results! Please try again")
+            return render(request, "filtered_results.html", {'listings': listings})
+    
     else:
         return render(request, "error.html")
         
@@ -71,7 +77,7 @@ def edit_listing(request, pk):
     else: 
         return HttpResponseForbidden()
         
-    return render(request, 'edit_listing.html', {'form': form})
+    return render(request, 'edit_listing.html', {'listing': listing, 'form': form})
     #rendering the createnew file as its the same- wil display the info already saved and then save over with the edits. Linked in URLs
     
 def listing_detail(request, pk):
@@ -88,7 +94,18 @@ def view_listing(request, pk):
     Or return a 404 error if the post is not found
     """
     listing = get_object_or_404(Listing, pk=pk)
-    return render(request, "view_listing.html", {'listing': listing})    
+    return render(request, "view_listing.html", {'listing': listing})  
+    
+def delete_listing(request, pk):
+    """
+    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
+    Or return a 404 error if the post is not found
+    """
+    listing = get_object_or_404(Listing, pk=pk)
+    print(listing)
+    delete_instance = Listing.objects.filter(id=listing.id).delete()
+    messages.success(request, "Listing Deleted")
+    return redirect('profile')
     
 @csrf_exempt
 def upvote(request):

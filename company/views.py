@@ -45,10 +45,15 @@ def filtered_company(request):
     """
     if request.method =="POST":
         search_criteria = request.POST.get('search-company')
-        companies = CompanyDetail.objects.filter(business_name__contains=search_criteria)
-        return render(request, "filtered_company.html", {'companies': companies})
+        companies = CompanyDetail.objects.filter(business_name__icontains=search_criteria)
+        if companies:
+            return render(request, "filtered_company.html", {'companies': companies})
+        else :
+            messages.success(request, "Sorry, no matching results! Please try again")
+            return render(request, "filtered_company.html", {'companies': companies})
     else:
-        return HttpResponse("Sorry, no results for that business - please try again")
+        return render(request, "error.html")
+        
         
         #TODO add display on average rating in list.. 
 
