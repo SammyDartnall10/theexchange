@@ -41,12 +41,6 @@ def get_listings(request):
     upvoted = Upvotes.objects.filter(voter = user).values_list('listing_upvoted', flat=True) #list to check to see if listing has been liked by user
     listings = Listing.objects.all().order_by('-count')
     
-    #listings = Listing.objects.all()
-    #listings = Listing.objects.distinct('title').order_by('upvotes')
-    #listings = Listing.objects.annotate(count=Count('upvotes_set__id')).order_by('count')  
-    #listings = Listing.objects.values('title').distinct().order_by('upvotes') 
-    print (listings)
-          
     return render(request, "exchange.html", {'listings': listings, 'upvoted': upvoted})
 
     
@@ -80,37 +74,33 @@ def edit_listing(request, pk):
     return render(request, 'edit_listing.html', {'listing': listing, 'form': form})
     #rendering the createnew file as its the same- wil display the info already saved and then save over with the edits. Linked in URLs
     
+
 def listing_detail(request, pk):
     """
-    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
-    Or return a 404 error if the post is not found
+    Create a view that returns a single Listing object based on the post ID (pk) and render it to the template. User can then click edit details. 
     """
     listing = get_object_or_404(Listing, pk=pk)
     return render(request, "listing_detail.html", {'listing': listing})  
 
 def view_listing(request, pk):
     """
-    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
-    Or return a 404 error if the post is not found
+    A read only view - not editable 
     """
     listing = get_object_or_404(Listing, pk=pk)
     return render(request, "view_listing.html", {'listing': listing})  
     
 def delete_listing(request, pk):
     """
-    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
-    Or return a 404 error if the post is not found
+    Deleting instance of Listing - Modal is in HTML to stop accidental deleting 
     """
     listing = get_object_or_404(Listing, pk=pk)
-    print(listing)
     delete_instance = Listing.objects.filter(id=listing.id).delete()
     messages.success(request, "Listing Deleted")
     return redirect('profile')
     
 @csrf_exempt
 def upvote(request):
-    """Take the pk from the ajax call and use to find listing id. Add a new upvote entry in the upvote table with the current user as the upviter to record who voted for what"""
-    print("got as far as  the upvote view")
+    """Take the pk from the ajax call and use to find listing id. Add a new upvote entry in the upvote table with the current user as the upvoter to record who voted for what"""
     pk = request.POST['pk']
     listing = get_object_or_404(Listing, pk=pk)
     
@@ -134,8 +124,6 @@ def downvote(request):
     
     listing.count = listing.count - 1
     listing.save()
-    print("count is")
-    print(listing.count)
     
     voter = request.user
     downvote_instance = Upvotes.objects.filter(voter=voter, listing_upvoted=listing).delete()

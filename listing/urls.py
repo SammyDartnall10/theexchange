@@ -31,6 +31,5 @@ urlpatterns = [
     path('<pk>/delete_listing', delete_listing, name='delete_listing'),
     path('upvote', upvote, name='upvote'),
     path('downvote', downvote, name='downvote'),
-    #path('new/', new_listing, name='new_listing'),
 ]
     

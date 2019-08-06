@@ -132,6 +132,7 @@ def profile(request):
         #avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
     else: 
         company = CompanyDetail.objects.get(created_by = 'admin2')
+        
     return render(request, 'profile.html', {"profile": user, "listings": listings, "company": company, 'reviews': reviews})                    
 
 

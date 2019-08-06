@@ -10,17 +10,6 @@ from .models import CompanyDetail, CompanyReview
 
 # Create your views here.
 
-def create_company(request):
-    if request.method == 'POST':
-        form = CompanyDetailForm(request.POST, request.FILES)
-        if form.is_valid():
-            company = form.save(commit=False)
-            company.created_by = request.user  # The logged-in user - re-fill in this field automatically
-            company.save()
-            return redirect('profile')
-    else:
-        form = CompanyDetailForm()
-    return render(request, 'new_company.html', {'form': form})
 
 def edit_company(request, pk):
     company = get_object_or_404(CompanyDetail, pk=pk)
@@ -36,7 +25,7 @@ def edit_company(request, pk):
         return HttpResponseForbidden()
         
     return render(request, 'edit_company.html', {'form': form})
-    #rendering the createnew file as its the same- wil display the info already saved and then save over with the edits. Linked in URLs
+    
     
 
 def filtered_company(request):
@@ -55,12 +44,10 @@ def filtered_company(request):
         return render(request, "error.html")
         
         
-        #TODO add display on average rating in list.. 
 
 def company_detail(request, pk):
     """
-    Create a view that returns a single Post object based on the post ID (pk) and render it to the 'postdetail.html' template.
-    Or return a 404 error if the post is not found
+    View that is only accessable as the logged in user - can go to edit pages from here
     """
     company = get_object_or_404(CompanyDetail, pk=pk)
     company_form = CompanyReviewForm(request.POST, request.FILES)
@@ -99,5 +86,17 @@ def add_company_review(request, company):
     else:
         company_form = CompanyReviewForm()
         
-    return redirect('/')  
+    return redirect('/') 
+    
  
+def create_company(request):
+    if request.method == 'POST':
+        form = CompanyDetailForm(request.POST, request.FILES)
+        if form.is_valid():
+            company = form.save(commit=False)
+            company.created_by = request.user  # The logged-in user - re-fill in this field automatically
+            company.save()
+            return redirect('profile')
+    else:
+        form = CompanyDetailForm()
+    return render(request, 'new_company.html', {'form': form})
