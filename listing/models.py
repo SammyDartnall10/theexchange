@@ -19,6 +19,9 @@ class Listing(models.Model):
         total_count = count_upvotes.count()
         
         return total_count
+        
+    #Credit to my mentor Aaron Sinnott for helping me with the upvotes property/how to set the property as a function. 
+    #Have learned in the process that you can display the result of this function, but it doesnt act like an integer. Tried converting to an int() in views.py for ordering with no luck. Have put in the count property instead to based the ranking/upvotes on. 
     
     def __str__(self):
         return self.title

@@ -54,7 +54,10 @@ def login(request):
 stripe.api_key = settings.STRIPE_SECRET
         
 def register(request):
-    """Render the registration page"""
+    """
+    Rego page is made up of the standard Django user auth, and stripe payments form. Reason for having it in one is to stop half the process going through, ie, say the user details are correct but the card payment fails, an account wont be created. Also stops the flipside happening - eg stripe payments going through but the account not being created. 
+    Company creation is triggered when the user registers, but details for the company are not in this form/view, to reduce the burden on  the user/make the forms less overwhelming (noone like filling out 20 fields for a simple signup! Would rather do it later)
+    """
     if request.user.is_authenticated:
         return redirect(reverse('profile'))
 
@@ -129,7 +132,7 @@ def profile(request):
     if CompanyDetail.objects.get(created_by = request.user):
         company = CompanyDetail.objects.get(created_by = request.user)
         reviews = CompanyReview.objects.filter(company_reviewed = company)
-        #avg_rating = CompanyReview.objects.filter(company_reviewed = company).aggregate(Avg('rating'))
+        
     else: 
         company = CompanyDetail.objects.get(created_by = 'admin2')
         
@@ -138,6 +141,9 @@ def profile(request):
 
 
 def edit_profile(request, pk):
+    """
+    Only name, username, an email and password are editable here. Id is hidden, as it is a forgein key to other tables- changing it would result in discrepancies in data records. 
+    """
     user = get_object_or_404(User, pk=pk)
     print(user.username)
     if request.user.is_authenticated and request.user == request.user or request.user.is_superuser: 
